@@ -1,0 +1,25 @@
+add
+pups
+4 5
+500
+SUPPRESSOR
+BOLTGUN
+POWER_SWORD
+orden parent
+add
+twinki
+4 5
+500
+HELIX
+HEAVY_BOLTGUN
+POWER_SWORD
+orden parent
+add
+slave
+4 5
+500
+LIBRARIAN
+MULTI_MELTA
+POWER_SWORD
+orden parent
+info

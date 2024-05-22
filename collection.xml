@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collection>
+	<element id="16">
+		<name>name3</name>
+		<coordinates x="4" y="5.0"/>
+		<creationDate>18.05.2024 03:50</creationDate>
+		<health>500</health>
+		<category>HELIX</category>
+		<weaponType>HEAVY_BOLTGUN</weaponType>
+		<meleeWeapon>POWER_SWORD</meleeWeapon>
+		<chapter name="orden" parentLegion="parent"/>
+	</element>
+	<element id="12">
+		<name>twinki</name>
+		<coordinates x="4" y="5.0"/>
+		<creationDate>18.05.2024 02:03</creationDate>
+		<health>500</health>
+		<category>HELIX</category>
+		<weaponType>HEAVY_BOLTGUN</weaponType>
+		<meleeWeapon>POWER_SWORD</meleeWeapon>
+		<chapter name="orden" parentLegion="parent"/>
+	</element>
+	<element id="13">
+		<name>twinki</name>
+		<coordinates x="4" y="5.0"/>
+		<creationDate>18.05.2024 02:15</creationDate>
+		<health>500</health>
+		<category>HELIX</category>
+		<weaponType>HEAVY_BOLTGUN</weaponType>
+		<meleeWeapon>POWER_SWORD</meleeWeapon>
+		<chapter name="orden" parentLegion="parent"/>
+	</element>
+	<element id="14">
+		<name>name1</name>
+		<coordinates x="4" y="5.0"/>
+		<creationDate>18.05.2024 03:49</creationDate>
+		<health>500</health>
+		<category>HELIX</category>
+		<weaponType>HEAVY_BOLTGUN</weaponType>
+		<meleeWeapon>POWER_SWORD</meleeWeapon>
+		<chapter name="orden" parentLegion="parent"/>
+	</element>
+	<element id="15">
+		<name>name2</name>
+		<coordinates x="4" y="5.0"/>
+		<creationDate>18.05.2024 03:49</creationDate>
+		<health>500</health>
+		<category>HELIX</category>
+		<weaponType>HEAVY_BOLTGUN</weaponType>
+		<meleeWeapon>POWER_SWORD</meleeWeapon>
+		<chapter name="orden" parentLegion="parent"/>
+	</element></collection>
