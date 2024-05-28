@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 
 
 /**
- * Парсинг из .xml
+ * РџР°СЂСЃРёРЅРі РёР· .xml
  */
 
 public class WriteFileXML {
@@ -26,19 +26,19 @@ public class WriteFileXML {
             XMLStreamWriter writer = factory.createXMLStreamWriter(new FileOutputStream(filePath), "UTF-8");
             writeCollection(writer, collection);
         } catch (FileNotFoundException e) {
-            throw new FileCollectionException("Файл не найден");
+            throw new FileCollectionException("Р¤Р°Р№Р» РЅРµ РЅР°Р№РґРµРЅ");
         } catch (XMLStreamException e) {
-            throw new FileCollectionException("Ошибка с файлом");
+            throw new FileCollectionException("РћС€РёР±РєР° СЃ С„Р°Р№Р»РѕРј");
         } catch (NullPointerException e) {
-            throw new FileCollectionException("Имя файла для записи не указано в переменной окружения FILENAME");
+            throw new FileCollectionException("РРјСЏ С„Р°Р№Р»Р° РґР»СЏ Р·Р°РїРёСЃРё РЅРµ СѓРєР°Р·Р°РЅРѕ РІ РїРµСЂРµРјРµРЅРЅРѕР№ РѕРєСЂСѓР¶РµРЅРёСЏ FILENAME");
         } catch (Exception e) {
-            throw new FileCollectionException("Непредвиденная ошибка при записи в файл");
+            throw new FileCollectionException("РќРµРїСЂРµРґРІРёРґРµРЅРЅР°СЏ РѕС€РёР±РєР° РїСЂРё Р·Р°РїРёСЃРё РІ С„Р°Р№Р»");
         }
     }
 
     public static void writeCollection(XMLStreamWriter writer, SpaceMarineCollection collection) throws XMLStreamException {
         writer.writeStartDocument("UTF-8", "1.0");
-        //todo может убрать строку ниже?
+        //todo РјРѕР¶РµС‚ СѓР±СЂР°С‚СЊ СЃС‚СЂРѕРєСѓ РЅРёР¶Рµ?
         writer.writeCharacters("\n");
         writer.writeStartElement("collection");
         for (SpaceMarine o : collection) {

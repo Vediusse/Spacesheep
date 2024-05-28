@@ -15,14 +15,14 @@ public class RequestExecute {
         String login = request.getLogin();
 
         if (!clientCollections.containsKey(login)) {
-            // Создание новой коллекции для клиента
+            // РЎРѕР·РґР°РЅРёРµ РЅРѕРІРѕР№ РєРѕР»Р»РµРєС†РёРё РґР»СЏ РєР»РёРµРЅС‚Р°
             clientCollections.put(login, new AuthCheckSpaceMarineCollection(Server.cachedSpaceMarineCollection, login));
         }
 
         AuthCheckSpaceMarineCollection collection = (AuthCheckSpaceMarineCollection) clientCollections.get(login);
 
-        // Выводим полученное сообщение от клиента на консоль
-        System.out.println("Команда с клиента: " + request.getCommand());
+        // Р’С‹РІРѕРґРёРј РїРѕР»СѓС‡РµРЅРЅРѕРµ СЃРѕРѕР±С‰РµРЅРёРµ РѕС‚ РєР»РёРµРЅС‚Р° РЅР° РєРѕРЅСЃРѕР»СЊ
+        System.out.println("РљРѕРјР°РЅРґР° СЃ РєР»РёРµРЅС‚Р°: " + request.getCommand());
         if (request.getCommand().equals("send_command")) {
             CommandAction comm = new SendCommandSet();
             return comm.execute(collection, env, new String[0], null);
@@ -44,12 +44,12 @@ public class RequestExecute {
 
         }
 
-        // проверка на регистрацию
+        // РїСЂРѕРІРµСЂРєР° РЅР° СЂРµРіРёСЃС‚СЂР°С†РёСЋ
         CommandAction comm = new AuthCommand();
         Response response = comm.execute(collection, env, new String[]{request.getLogin() + " " + request.getPassword()});
         if (response.getStatus() != 200) {
             Response r = new Response();
-            r.setError("Такого пользователя нет в бд");
+            r.setError("РўР°РєРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РЅРµС‚ РІ Р±Рґ");
             return r;
         }
 
