@@ -8,11 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class LogIn extends Application {
-    private static UDPGui udpClient;
-    public static void LogIn(UDPGui client) {
-        udpClient = client;
-    }
+public class LogIn extends ApplicationAbsract {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -21,7 +17,7 @@ public class LogIn extends Application {
         Parent root = loader.load();
 
         BaseController controller = loader.getController();
-        controller.setUdpClient(udpClient);
+        controller.setUdpClient(this.udpGui);
 
         primaryStage.setTitle("Log in");
         Scene scene = new Scene(root, 1080, 640); // Размер окна

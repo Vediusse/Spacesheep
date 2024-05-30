@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="io.github.zeculesu.itmo.prog5.GUI.Controllers.LogInController" styleClass="root">
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="io.github.zeculesu.itmo.prog5.GUI.Controllers.LogInController" styleClass="root">
     <HBox styleClass="hbox-layout">
         <VBox alignment="CENTER" spacing="20.0" styleClass="vbox-register">
             <!-- Заголовок -->
@@ -37,4 +37,4 @@
             </image>
         </ImageView>
     </HBox>
-</HBox>
+</VBox>

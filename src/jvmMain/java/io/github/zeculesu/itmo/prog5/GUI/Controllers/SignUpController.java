@@ -39,27 +39,6 @@ public class SignUpController extends BaseController {
             if (userTextField.getText().isEmpty() || pwBox.getText().isEmpty()) {
                 errorLabel.setVisible(true);
             } else {
-//                Request request = new Request();
-//                request.setCommand("auth");
-//                request.setArg(userTextField.getText() + " " + pwBox.getText());
-//                request.setLogin(userTextField.getText());
-//
-//                byte[] sendData;
-//                Response response;
-//                try {
-//                    sendData = UDPClient.castToByte(request);
-//                    udpClient.sendPacket(sendData);
-//                    response = udpClient.getResponse();
-//                } catch (IOException | ClassNotFoundException ex) {
-//                    throw new RuntimeException(ex);
-//                }
-//                udpClient.closeClientSocket();
-//
-//                if (response.getStatus() == 200) {
-//                    System.out.println("Пользователь зарегистрирован: " + userTextField.getText());
-//                }else {
-//                    System.out.println("Пользователь знеарегистрирован: " + userTextField.getText());
-//                }
                 try {
                     udpGui.createSocket();
                 } catch (SocketException ex) {

@@ -37,6 +37,15 @@ public class LogInController extends BaseController {
             if (userTextField.getText().isEmpty() || pwBox.getText().isEmpty()) {
                 errorLabel.setVisible(true);
             } else {
+                try {
+                    udpGui.createSocket();
+                } catch (SocketException ex) {
+                    throw new RuntimeException(ex);
+                } catch (UnknownHostException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+
                 Request request = new Request();
                 request.setCommand("auth");
                 request.setArg(userTextField.getText() + " " + pwBox.getText());
@@ -54,36 +63,14 @@ public class LogInController extends BaseController {
                 udpGui.closeClientSocket();
 
                 if (response.getStatus() == 200) {
-                    System.out.println("Пользователь зарегистрирован: " + userTextField.getText());
+                    this.goToMain(this.signUpButton);
                 }else {
                     System.out.println("Пользователь знеарегистрирован: " + userTextField.getText());
-                }
-//                try {
-//                    udpGui.createSocket();
-//                } catch (SocketException ex) {
-//                    throw new RuntimeException(ex);
-//                } catch (UnknownHostException ex) {
-//                    throw new RuntimeException(ex);
-//                }
-//
-//                Request request = new Request();
-//                request.setCommand("register");
-//                request.setArg(userTextField.getText() + " " + pwBox.getText());
-//                Response response;
-//                try {
-//                    byte[] sendData = UDPGui.castToByte(request);
-//                    udpGui.sendPacket(sendData);
-//                    response = udpGui.getResponse();
-//                } catch (IOException | ClassNotFoundException ex) {
-//                    throw new RuntimeException(ex);
-//                }
-//                udpGui.closeClientSocket();
+                    this.goToMain(this.signUpButton);
 
-                if (response.getStatus() == 200) {
-                    System.out.println("Пользователь зарегистрирован: " + userTextField.getText());
-                } else {
-                    System.out.println(response.getMessage());
                 }
+
+
 
             }
         });
@@ -93,4 +80,6 @@ public class LogInController extends BaseController {
             System.out.println("Перейти к форме входа");
         });
     }
+
+
 }
