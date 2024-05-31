@@ -1,8 +1,10 @@
 package io.github.zeculesu.itmo.prog5.GUI.Controllers;
 
+import io.github.zeculesu.itmo.prog5.GUI.UDPGui;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Main;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.MapMarines;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Table;
+import io.github.zeculesu.itmo.prog5.models.Coordinates;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -12,9 +14,11 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class CoordinatePlaneController {
+public class CoordinatePlaneController extends BaseController {
 
     @FXML
     private Canvas coordinatePlane;
@@ -38,7 +42,6 @@ public class CoordinatePlaneController {
     private final double AXIS_WIDTH = 2.0; // Ширина осей координат
     private final Color AXIS_COLOR = Color.FLORALWHITE; // Цвет осей координат
 
-    private final Color POINT_COLOR = Color.RED; // Цвет точек
     private final double POINT_RADIUS = 3.0; // Радиус точек
 
     private final double SCALE = 10.0; // Масштаб
@@ -47,12 +50,22 @@ public class CoordinatePlaneController {
     private double dragStartX, dragStartY; // Начальные координаты мыши при начале перетаскивания
     private double dragOffsetX = 0, dragOffsetY = 0; // Смещение мыши при перетаскивании
 
-    private final List<double[]> points = new ArrayList<>(); // Список точек для отображения
+    private Map<String, ArrayList<Coordinates>> loginCoord; // Список точек для отображения
 
     public void initialize() {
-        addPoint(5, 4);
-        addPoint(8, 8);
-        addPoint(-1, -2);
+        try {
+            this.loginCoord = udpGui.sendMeLoginCoords().getLoginCoord();
+        } catch (Exception e) {
+            this.loginCoord = new HashMap<>();
+            ArrayList<Coordinates> coordList = new ArrayList<>();
+            coordList.add(new Coordinates(1L, 3));
+            coordList.add(new Coordinates(5L, 9));
+            ArrayList<Coordinates> coordList2 = new ArrayList<>();
+            coordList2.add(new Coordinates(-5L, -3));
+            coordList2.add(new Coordinates(10L, 0));
+            loginCoord.put("loh", coordList);
+            loginCoord.put("log", coordList2);
+        }
         redrawCoordinatePlane(); // Перерисовываем координатную плоскость и точки при инициализации
 
         // Добавляем обработчики событий мыши для перемещения карты
@@ -61,9 +74,6 @@ public class CoordinatePlaneController {
 
         // Добавляем обработчики событий для точек
         coordinatePlane.setOnMouseClicked(this::onPointClicked);
-
-
-
 
     }
 
@@ -108,18 +118,17 @@ public class CoordinatePlaneController {
         gc.strokeLine(width / 2 + dragOffsetX, -1000, width / 2 + dragOffsetX, 1000); // Ось Y
     }
 
-    private void addPoint(double x, double y) {
-        points.add(new double[]{x, y});
-    }
-
     private void drawPoints(GraphicsContext gc, double width, double height) {
-        gc.setFill(POINT_COLOR);
-
         // Переводим координаты точек в координаты на холсте с учетом масштаба и смещения
-        for (double[] point : points) {
-            double scaledX = width / 2 + point[0] * SCALE + dragOffsetX;
-            double scaledY = height / 2 - point[1] * SCALE + dragOffsetY; // Инвертируем y и учитываем масштаб
-            gc.fillOval(scaledX - POINT_RADIUS, scaledY - POINT_RADIUS, 2 * POINT_RADIUS, 2 * POINT_RADIUS);
+        for (String login : loginCoord.keySet()) {
+            Color color = Color.color(Math.random(), Math.random(), Math.random());
+            for (Coordinates point : loginCoord.get(login)) {
+
+                double scaledX = width / 2 + point.getX() * SCALE + dragOffsetX;
+                double scaledY = height / 2 - point.getY() * SCALE + dragOffsetY; // Инвертируем y и учитываем масштаб
+                gc.setFill(color);
+                gc.fillOval(scaledX - POINT_RADIUS, scaledY - POINT_RADIUS, 2 * POINT_RADIUS, 2 * POINT_RADIUS);
+            }
         }
     }
 
@@ -131,14 +140,21 @@ public class CoordinatePlaneController {
         double clickRadius = POINT_RADIUS * 2.5;
 
         // Проверяем, попадает ли нажатие мыши в радиус какой-либо точки
-        for (double[] point : points) {
-            double scaledX = coordinatePlane.getWidth() / 2 + point[0] * SCALE + dragOffsetX;
-            double scaledY = coordinatePlane.getHeight() / 2 - point[1] * SCALE + dragOffsetY;
-            if (Math.pow(mouseX - scaledX, 2) + Math.pow(mouseY - scaledY, 2) <= Math.pow(clickRadius, 2)) {
-                // Если попали в точку, выводим информацию о ней
-                System.out.println("Clicked point: (" + point[0] + ", " + point[1] + ")");
-                return;
+        for (String login : loginCoord.keySet()) {
+
+            for (Coordinates point : loginCoord.get(login)) {
+                double scaledX = coordinatePlane.getWidth() / 2 + point.getX() * SCALE + dragOffsetX;
+                double scaledY = coordinatePlane.getHeight() / 2 - point.getY() * SCALE + dragOffsetY;
+                if (Math.pow(mouseX - scaledX, 2) + Math.pow(mouseY - scaledY, 2) <= Math.pow(clickRadius, 2)) {
+                    // Если попали в точку, выводим информацию о ней
+                    System.out.println("Clicked point: (" + point.getX() + ", " + point.getY() + ")");
+                    return;
+                }
             }
         }
+    }
+
+    public void setPoints(Map<String, ArrayList<Coordinates>> loginCoord) {
+        this.loginCoord = loginCoord;
     }
 }
