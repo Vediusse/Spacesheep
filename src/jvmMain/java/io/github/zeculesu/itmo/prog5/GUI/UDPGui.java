@@ -7,7 +7,7 @@ import io.github.zeculesu.itmo.prog5.models.SendedCommandResponse;
 
 import java.io.*;
 import java.net.*;
-import java.util.Scanner;
+
 
 public class UDPGui {
     DatagramSocket clientSocket;
