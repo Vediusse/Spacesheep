@@ -21,6 +21,8 @@ public class Table extends ApplicationAbsract {
         primaryStage.setTitle("Стена");
 
 
+
+
         Scene scene = new Scene(root, 1080, 640); // Размер окна
         scene.getStylesheets().add(getClass().getResource("/style/table.css").toExternalForm()); // Подключаем CSS
         primaryStage.setScene(scene);
