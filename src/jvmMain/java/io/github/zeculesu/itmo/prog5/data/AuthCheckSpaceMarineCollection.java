@@ -46,8 +46,6 @@ public class AuthCheckSpaceMarineCollection implements SpaceMarineCollection {
         } else {
             throw new OwnershipException();
         }
-
-        //todo починить дату создания
     }
 
     @Override

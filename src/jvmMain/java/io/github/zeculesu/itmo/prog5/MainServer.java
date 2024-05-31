@@ -11,7 +11,7 @@ public class MainServer {
         // команды доступные для клиента
         CommandSet commandSetMapClient = new CommandSetMapImpl(new AddCommand(), new ClearCommand(), new FilterNameCommand(),
                 new HelpCommand(), new PrintHealthCommand(), new RemoveByIdCommand(), new RemoveByWeaponCommand(), new RemoveHeadCommand(), new RemoveLowerCommand(),
-                new ShowCommand(), new UpdateCommand(), new InfoCommand(), new ExitCommand(), new HistoryCommand(), new ExecuteScriptCommand());
+                new ShowCommand(), new UpdateCommand(), new InfoCommand(), new ExitCommand(), new HistoryCommand(), new ExecuteScriptCommand(), new GetLoginCoords());
         String fileName = System.getenv("FILENAME");
         DefaultConsoleCommandEnvironmentImpl env = new DefaultConsoleCommandEnvironmentImpl(commandSetMapClient, fileName);
         Server server = new Server(env, 45000);
