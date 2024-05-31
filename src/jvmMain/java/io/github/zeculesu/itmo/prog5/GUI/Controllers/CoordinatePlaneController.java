@@ -1,10 +1,15 @@
 package io.github.zeculesu.itmo.prog5.GUI.Controllers;
 
+import io.github.zeculesu.itmo.prog5.GUI.Windows.Main;
+import io.github.zeculesu.itmo.prog5.GUI.Windows.MapMarines;
+import io.github.zeculesu.itmo.prog5.GUI.Windows.Table;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +18,22 @@ public class CoordinatePlaneController {
 
     @FXML
     private Canvas coordinatePlane;
+
+
+    @FXML
+    private Button wallButton;
+
+    @FXML
+    private Button catalogButton;
+
+    @FXML
+    private Button tableButton;
+
+    @FXML
+    private Button workshopButton;
+
+    @FXML
+    private Button settingsButton;
 
     private final double AXIS_WIDTH = 2.0; // Ширина осей координат
     private final Color AXIS_COLOR = Color.FLORALWHITE; // Цвет осей координат
@@ -40,6 +61,10 @@ public class CoordinatePlaneController {
 
         // Добавляем обработчики событий для точек
         coordinatePlane.setOnMouseClicked(this::onPointClicked);
+
+
+
+
     }
 
     private void onMousePressed(MouseEvent event) {

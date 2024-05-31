@@ -9,7 +9,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public abstract class BaseController {
-    protected UDPGui udpGui;
+    protected UDPGui udpGui = new UDPGui("127.0.0.1",45001);
 
     public void setUdpClient(UDPGui udpClient) {
         this.udpGui = udpClient;
