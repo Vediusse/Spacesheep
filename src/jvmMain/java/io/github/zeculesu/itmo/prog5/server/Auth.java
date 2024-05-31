@@ -15,7 +15,7 @@ public class Auth {
     public static Response sendAuth(String login, String password, UDPClient udpClient) throws SocketTimeoutException, IOException, ClassNotFoundException {
         udpClient.createSocket();
 
-        // Отправка сообщения серверу
+        // РћС‚РїСЂР°РІРєР° СЃРѕРѕР±С‰РµРЅРёСЏ СЃРµСЂРІРµСЂСѓ
         Request request = new Request();
         request.setCommand("auth");
         request.setArg(login + " " + password);
@@ -25,7 +25,7 @@ public class Auth {
 
         udpClient.sendPacket(sendData);
         Response response = udpClient.getResponse();
-        // Закрываем сокет
+        // Р—Р°РєСЂС‹РІР°РµРј СЃРѕРєРµС‚
         udpClient.closeClientSocket();
 
         return response;
@@ -34,7 +34,7 @@ public class Auth {
     public static Response checkUniqLogin(String login, UDPClient udpClient) throws IOException, ClassNotFoundException {
         udpClient.createSocket();
 
-        // Отправка сообщения серверу
+        // РћС‚РїСЂР°РІРєР° СЃРѕРѕР±С‰РµРЅРёСЏ СЃРµСЂРІРµСЂСѓ
         Request request = new Request();
         request.setCommand("check_uniq_login");
         request.setArg(login);
@@ -44,7 +44,7 @@ public class Auth {
 
         udpClient.sendPacket(sendData);
         Response response = udpClient.getResponse();
-        // Закрываем сокет
+        // Р—Р°РєСЂС‹РІР°РµРј СЃРѕРєРµС‚
         udpClient.closeClientSocket();
 
         return response;
@@ -53,7 +53,7 @@ public class Auth {
     public static Response sendReg(String login, String password, UDPClient udpClient) throws IOException, ClassNotFoundException {
         udpClient.createSocket();
 
-        // Отправка сообщения серверу
+        // РћС‚РїСЂР°РІРєР° СЃРѕРѕР±С‰РµРЅРёСЏ СЃРµСЂРІРµСЂСѓ
         Request request = new Request();
         request.setCommand("register");
         request.setArg(login + " " + password);
@@ -62,7 +62,7 @@ public class Auth {
 
         udpClient.sendPacket(sendData);
         Response response = udpClient.getResponse();
-        // Закрываем сокет
+        // Р—Р°РєСЂС‹РІР°РµРј СЃРѕРєРµС‚
         udpClient.closeClientSocket();
 
         return response;
@@ -76,13 +76,13 @@ public class Auth {
 
             BigInteger no = new BigInteger(1, messageDigest);
 
-            String hashtext = no.toString(16);
+            StringBuilder hashtext = new StringBuilder(no.toString(16));
 
             while (hashtext.length() < 32) {
-                hashtext = "0" + hashtext;
+                hashtext.insert(0, "0");
             }
 
-            return hashtext;
+            return hashtext.toString();
         }
 
         catch (NoSuchAlgorithmException e) {

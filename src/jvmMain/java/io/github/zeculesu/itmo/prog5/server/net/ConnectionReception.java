@@ -6,11 +6,11 @@ import java.net.DatagramSocket;
 
 public class ConnectionReception {
     public static DatagramPacket reception(DatagramSocket serverSocket, byte[] receiveData) throws IOException {
-        // Создаем пакет для приема данных от клиента
+        // РЎРѕР·РґР°РµРј РїР°РєРµС‚ РґР»СЏ РїСЂРёРµРјР° РґР°РЅРЅС‹С… РѕС‚ РєР»РёРµРЅС‚Р°
         DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
-        // Получаем данные от клиента
+        // РџРѕР»СѓС‡Р°РµРј РґР°РЅРЅС‹Рµ РѕС‚ РєР»РёРµРЅС‚Р°
         serverSocket.receive(receivePacket);
-        // Отдаем пакет нашему серверу
+        // РћС‚РґР°РµРј РїР°РєРµС‚ РЅР°С€РµРјСѓ СЃРµСЂРІРµСЂСѓ
         return receivePacket;
     }
 }

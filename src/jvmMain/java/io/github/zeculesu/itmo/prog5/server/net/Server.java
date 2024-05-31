@@ -4,7 +4,6 @@ import io.github.zeculesu.itmo.prog5.client.ConsoleCommandEnvironment;
 import io.github.zeculesu.itmo.prog5.data.AuthCheckSpaceMarineCollection;
 import io.github.zeculesu.itmo.prog5.data.CachedSpaceMarineCollection;
 import io.github.zeculesu.itmo.prog5.data.InMemorySpaceMarineCollection;
-import io.github.zeculesu.itmo.prog5.data.SpaceMarineCollection;
 import io.github.zeculesu.itmo.prog5.models.Request;
 import io.github.zeculesu.itmo.prog5.models.Response;
 import io.github.zeculesu.itmo.prog5.models.SpaceMarine;
@@ -17,7 +16,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Queue;
 import java.util.concurrent.*;
 
 import static kotlin.io.ConsoleKt.readlnOrNull;
@@ -156,18 +154,34 @@ public class Server {
 
     public void run() {
         try {
-            // Создаем сокет для приема данных на порту
             DatagramSocket serverSocket = new DatagramSocket(port);
-
+            ExecutorService executorService = Executors.newFixedThreadPool(4);
             while (this.environment.isRun()) {
-                // получаем запрос от клиента
                 DatagramPacket receivePacket = ConnectionReception.reception(serverSocket, this.receiveData);
 
-                // Выполняем запрос клиента
-                Request request = RequestReading.requestRead(receivePacket);
-                Response response = RequestExecute.requestExecute(this.environment, clientCollections, request);
-                //отправляем ответ клиенту
-                ResponseSending.responseSend(serverSocket, receivePacket, response);
+                CompletableFuture.supplyAsync(() -> {
+                            try {
+                                return RequestReading.requestRead(receivePacket);
+                            } catch (IOException | ClassNotFoundException ignored) {
+                            }
+                            return null;
+                        }, executorService)
+                        .thenApplyAsync(requestData -> RequestExecute.requestExecute(this.environment, clientCollections, requestData), executorService)
+                        .thenAcceptAsync(response -> {
+                            Runnable sendingTesk = () -> {
+                                try {
+                                    ResponseSending.responseSend(serverSocket, receivePacket, response);
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            };
+                            Thread thread = new Thread(sendingTesk);
+                            thread.start();
+                        })
+                        .exceptionally(ex -> {
+                            ex.printStackTrace();
+                            return null;
+                        });
             }
         } catch (Exception e) {
             System.out.println(e);

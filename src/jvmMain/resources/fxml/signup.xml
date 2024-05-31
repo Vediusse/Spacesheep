@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="io.github.zeculesu.itmo.prog5.GUI.Controllers.SignUpController" styleClass="root">
+    <HBox styleClass="hbox-layout">
+        <VBox alignment="CENTER" spacing="20.0" styleClass="vbox-register">
+            <!-- Заголовок -->
+            <Label text="Зарегистрироваться" styleClass="label-header"/>
+
+            <!-- Поле для логина -->
+            <TextField fx:id="userTextField" promptText="Логин" styleClass="text-field"/>
+
+            <!-- Поле для пароля -->
+            <PasswordField fx:id="pwBox" promptText="Пароль" styleClass="password-field"/>
+
+            <!-- Сообщение об ошибке -->
+            <Label fx:id="errorLabel" text="Какая-то ошибка" styleClass="error-label"/>
+
+            <!-- Кнопка регистрации -->
+            <Button fx:id="signUpButton" text="Зарегистрироваться" styleClass="button"/>
+
+            <!-- Ссылка для входа -->
+            <Hyperlink fx:id="signInLink" text="Уже есть аккаунт" styleClass="hyperlink"/>
+        </VBox>
+
+        <!-- добавление изображения -->
+        <ImageView fitHeight="300" fitWidth="300" styleClass="image-view">
+            <image>
+                <Image url="@/img/rocket.png"/>
+            </image>
+        </ImageView>
+    </HBox>
+</HBox>

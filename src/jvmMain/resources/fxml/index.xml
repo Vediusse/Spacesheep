@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.*?>
+
+
+<HBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:id="root"
+      fx:controller="io.github.zeculesu.itmo.prog5.GUI.Controllers.MainController"
+      styleClass="root"
+      spacing="0"
+      fillHeight="true"
+      HBox.hgrow="ALWAYS">
+
+    <!-- Sidebar -->
+    <VBox fx:id="sidebar" styleClass="sidebar">
+        <Label fx:id="sidebarTitle" text="Space thunder" styleClass="sidebar-title"/>
+        <VBox fx:id="sidebarButtons" styleClass="sidebar-buttons">
+            <Button fx:id="wallButton" text="Стена" styleClass="sidebar-button"/>
+            <Button fx:id="catalogButton" text="Каталог" styleClass="sidebar-button"/>
+            <Button fx:id="workshopButton" text="Мастерская" styleClass="sidebar-button"/>
+            <Button fx:id="settingsButton" text="Настройка" styleClass="sidebar-button"/>
+        </VBox>
+    </VBox>
+
+    <!-- Main Content Area -->
+    <VBox fx:id="mainContent" styleClass="main-content" HBox.hgrow="ALWAYS">
+        <VBox fx:id="header" styleClass="header" >
+            <TextField fx:id="userTextField" promptText="Поиск" styleClass="header-search"/>
+        </VBox>
+        <ScrollPane styleClass="scroll-pane" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS">
+            <HBox styleClass="content-padding">
+                <VBox fx:id="content" styleClass="content">
+                    <Label fx:id="mainHeader" text="Главная страница" styleClass="main-header"/>
+
+                    <Pane fx:id="imageContainer" styleClass="image-container">
+                        <ImageView fx:id="imageView" styleClass="image-view">
+                            <Image url="@/img/frameBorder.png"/>
+                        </ImageView>
+                    </Pane>
+
+                    <Label fx:id="aboutHeader" text="Об авторе" styleClass="main-header"/>
+
+                    <VBox fx:id="buttons" styleClass="about">
+                        <HBox styleClass="about-card">
+                            <!-- Левый гибкий отступ -->
+                            <Region styleClass="flexible-region"/>
+
+                            <!-- Контент -->
+                            <ImageView fx:id="imageView" fitHeight="300" fitWidth="300" styleClass="image-view">
+                                <Image url="@/img/scale_1200.png"/>
+                            </ImageView>
+                            <VBox styleClass="about-info">
+                                <Label fx:id="authorName" text="Это Артемия" styleClass="about-text"/>
+                                <Label fx:id="authorDescription" text="Напишу про себя сама" wrapText="true" styleClass="about-text"/>
+                            </VBox>
+
+                            <!-- Правый гибкий отступ -->
+                            <Region styleClass="flexible-region"/>
+                        </HBox>
+
+                        <HBox styleClass="about-card">
+                            <!-- Левый гибкий отступ -->
+                            <Region styleClass="flexible-region"/>
+
+                            <!-- Контент -->
+                            <ImageView fx:id="imageView" fitHeight="300" fitWidth="300" styleClass="image-view">
+                                <Image url="@/img/scale_1200.png"/>
+                            </ImageView>
+                            <VBox styleClass="about-info">
+                                <Label fx:id="authorName" text="Это Валерий" styleClass="about-text"/>
+                                <Label fx:id="authorDescription" text="Люблю javafx тут должны быть картинки ссылки но да пошло оно" wrapText="true" styleClass="about-text"/>
+                            </VBox>
+
+                            <!-- Правый гибкий отступ -->
+                            <Region styleClass="flexible-region"/>
+                        </HBox>
+                    </VBox>
+                </VBox>
+            </HBox>
+        </ScrollPane>
+    </VBox>
+</HBox>
