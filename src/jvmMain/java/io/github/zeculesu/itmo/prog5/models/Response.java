@@ -1,19 +1,26 @@
 package io.github.zeculesu.itmo.prog5.models;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Ответ получаемый после выполнения команды
  */
 public class Response implements Serializable {
 
+    @Serial
+    private static final long serialVersionUID = 4830074588962352699L;
+
     private int status = 0;
     private String message;
     private String error;
     private List<String> output;
     private List<SpaceMarine> outputElement;
+
+    private Map<String, ArrayList<Coordinates>> loginCoord;
 
     public Response() {
         this.output = new ArrayList<>();
@@ -84,4 +91,11 @@ public class Response implements Serializable {
         this.status = status;
     }
 
+    public Map<String, ArrayList<Coordinates>> getLoginCoord() {
+        return this.loginCoord;
+    }
+
+    public void setLoginCoord(Map<String, ArrayList<Coordinates>> loginCoord) {
+        this.loginCoord = loginCoord;
+    }
 }

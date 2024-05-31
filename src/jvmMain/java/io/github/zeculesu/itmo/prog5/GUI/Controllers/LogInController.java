@@ -2,14 +2,19 @@ package io.github.zeculesu.itmo.prog5.GUI.Controllers;
 
 import io.github.zeculesu.itmo.prog5.GUI.Controllers.BaseController;
 import io.github.zeculesu.itmo.prog5.GUI.UDPGui;
+import io.github.zeculesu.itmo.prog5.GUI.Windows.LogIn;
+import io.github.zeculesu.itmo.prog5.GUI.Windows.SignUp;
 import io.github.zeculesu.itmo.prog5.models.Request;
 import io.github.zeculesu.itmo.prog5.models.Response;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 
 public class LogInController extends BaseController {
@@ -28,9 +33,16 @@ public class LogInController extends BaseController {
 
     @FXML
     private Hyperlink signInLink;
+    @FXML
+    private Label loginTitle;
+
+    private ResourceBundle bundle;
 
     @FXML
     public void initialize() {
+        // Установка локали по умолчанию (русский)
+        Locale.setDefault(new Locale("mk", "MK"));
+        setLocale(Locale.getDefault());
         errorLabel.setVisible(false);
 
         signUpButton.setOnAction(e -> {
@@ -63,23 +75,37 @@ public class LogInController extends BaseController {
                 udpGui.closeClientSocket();
 
                 if (response.getStatus() == 200) {
+                    this.setLogin(userTextField.getText());
+                    this.setPassword(pwBox.getText());
                     this.goToMain(this.signUpButton);
                 }else {
-                    System.out.println("Пользователь знеарегистрирован: " + userTextField.getText());
-                    this.goToMain(this.signUpButton);
-
+                    errorLabel.setVisible(true);
                 }
-
-
-
             }
         });
 
         signInLink.setOnAction(e -> {
-            // Логика перенаправления на форму входа
-            System.out.println("Перейти к форме входа");
+            SignUp logIn = new SignUp();
+            Stage currentStage = (Stage) signInLink.getScene().getWindow();
+            try {
+                logIn.start(new Stage());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+            currentStage.close();
         });
     }
+    public void setLocale(Locale locale) {
+        bundle = ResourceBundle.getBundle("messages", locale);
+        updateTexts();
+    }
 
-
+    private void updateTexts() {
+        loginTitle.setText(bundle.getString("loginTitle"));
+        userTextField.setPromptText(bundle.getString("login"));
+        pwBox.setPromptText(bundle.getString("pwBoxPrompt"));
+        errorLabel.setText(bundle.getString("errorLabel"));
+        signUpButton.setText(bundle.getString("signUpButton"));
+        signInLink.setText(bundle.getString("signInLink"));
+    }
 }

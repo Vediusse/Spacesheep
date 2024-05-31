@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 
 public class SignUpController extends BaseController {
@@ -30,9 +32,14 @@ public class SignUpController extends BaseController {
 
     @FXML
     private Hyperlink signInLink;
+    @FXML
+    private Label registerTitle;
 
+    private ResourceBundle bundle;
     @FXML
     public void initialize() {
+        Locale.setDefault(new Locale("mk", "MK"));
+        setLocale(Locale.getDefault());
         errorLabel.setVisible(false);
 
         signUpButton.setOnAction(e -> {
@@ -86,5 +93,18 @@ public class SignUpController extends BaseController {
             }
             currentStage.close();
         });
+    }
+    public void setLocale(Locale locale) {
+        bundle = ResourceBundle.getBundle("messages", locale);
+        updateTexts();
+    }
+
+    private void updateTexts() {
+        registerTitle.setText(bundle.getString("registerTitle"));
+        userTextField.setPromptText(bundle.getString("login"));
+        pwBox.setPromptText(bundle.getString("pwBoxPrompt"));
+        errorLabel.setText(bundle.getString("errorLabel"));
+        signUpButton.setText(bundle.getString("logUpButton"));
+        signInLink.setText(bundle.getString("signInLinkReg"));
     }
 }

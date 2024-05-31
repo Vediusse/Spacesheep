@@ -71,6 +71,9 @@ public class AddController extends BaseController {
             request.setPassword(this.getPassword());
             request.setElem(spaceMarine);
 
+            System.out.println(this.getLogin());
+            System.out.println(this.getPassword());
+
             // Ваш метод для отправки запроса
             udpGui.createSocket();
             udpGui.sendRequest(request);

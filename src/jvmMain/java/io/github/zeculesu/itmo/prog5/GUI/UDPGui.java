@@ -39,6 +39,25 @@ public class UDPGui {
         return response;
     }
 
+    public Response sendMeLoginCoords(String login, String password) throws IOException, ClassNotFoundException, SocketTimeoutException {
+        createSocket();
+
+        // Отправка сообщения серверу
+        Request request = new Request();
+        request.setCommand("getlogincoords");
+        request.setLogin(login);
+        request.setLogin(password);
+        byte[] sendData = castToByte(request);
+
+        sendPacket(sendData);
+        Response response = (Response) getResponse();
+        System.out.println(response.getError());
+        // Закрываем сокет
+        clientSocket.close();
+
+        return response;
+    }
+
     public void createSocket() throws SocketException, UnknownHostException {
         // Создаем сокет для отправки данных
         this.clientSocket = new DatagramSocket();

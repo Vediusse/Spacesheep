@@ -19,32 +19,33 @@
 
     <!-- Sidebar -->
     <VBox fx:id="sidebar" styleClass="sidebar">
-        <Label fx:id="sidebarTitle" text="Space thunder" styleClass="sidebar-title"/>
+        <Label fx:id="sidebarTitle" styleClass="sidebar-title"/>
         <VBox fx:id="sidebarButtons" styleClass="sidebar-buttons">
-            <Button fx:id="wallButton" text="Стена" styleClass="sidebar-button"/>
-            <Button fx:id="catalogButton" text="Каталог" styleClass="sidebar-button"/>
-            <Button fx:id="workshopButton" text="Мастерская" styleClass="sidebar-button"/>
-            <Button fx:id="settingsButton" text="Настройка" styleClass="sidebar-button"/>
+            <Button fx:id="wallButton" styleClass="sidebar-button"/>
+            <Button fx:id="catalogButton" styleClass="sidebar-button"/>
+            <Button fx:id="tableButton" styleClass="sidebar-button"/>
+            <Button fx:id="workshopButton" styleClass="sidebar-button"/>
+            <Button fx:id="settingsButton" styleClass="sidebar-button"/>
         </VBox>
     </VBox>
 
     <!-- Main Content Area -->
     <VBox fx:id="mainContent" styleClass="main-content" HBox.hgrow="ALWAYS">
         <VBox fx:id="header" styleClass="header" >
-            <TextField fx:id="userTextField" promptText="Поиск" styleClass="header-search"/>
+            <TextField fx:id="userTextField" styleClass="header-search"/>
         </VBox>
         <ScrollPane styleClass="scroll-pane" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS">
-            <HBox styleClass="content-padding">
+            <HBox styleClass="content-padding" VBox.vgrow="ALWAYS">
                 <VBox fx:id="content" styleClass="content">
-                    <Label fx:id="mainHeader" text="Главная страница" styleClass="main-header"/>
+                    <Label fx:id="mainHeader" styleClass="main-header"/>
 
-                    <Pane fx:id="imageContainer" styleClass="image-container">
+                    <Pane fx:id="imageContainer" styleClass="image-container content-wrapper">
                         <ImageView fx:id="imageView" styleClass="image-view">
-                            <Image url="@/img/frameBorder.png"/>
+                            <Image url="@/img/javafx.png"/>
                         </ImageView>
                     </Pane>
 
-                    <Label fx:id="aboutHeader" text="Об авторе" styleClass="main-header"/>
+                    <Label fx:id="aboutHeader" styleClass="main-section"/>
 
                     <VBox fx:id="buttons" styleClass="about">
                         <HBox styleClass="about-card">
@@ -52,12 +53,12 @@
                             <Region styleClass="flexible-region"/>
 
                             <!-- Контент -->
-                            <ImageView fx:id="imageView" fitHeight="300" fitWidth="300" styleClass="image-view">
+                            <ImageView fx:id="imageView1" fitHeight="300" fitWidth="300" styleClass="image-view">
                                 <Image url="@/img/scale_1200.png"/>
                             </ImageView>
                             <VBox styleClass="about-info">
-                                <Label fx:id="authorName" text="Это Артемия" styleClass="about-text"/>
-                                <Label fx:id="authorDescription" text="Напишу про себя сама" wrapText="true" styleClass="about-text"/>
+                                <Label fx:id="authorName1" styleClass="about-text"/>
+                                <Label fx:id="authorDescription1" wrapText="true" styleClass="about-text"/>
                             </VBox>
 
                             <!-- Правый гибкий отступ -->
@@ -69,18 +70,25 @@
                             <Region styleClass="flexible-region"/>
 
                             <!-- Контент -->
-                            <ImageView fx:id="imageView" fitHeight="300" fitWidth="300" styleClass="image-view">
+                            <ImageView fx:id="imageView2" fitHeight="300" fitWidth="300" styleClass="image-view">
                                 <Image url="@/img/scale_1200.png"/>
                             </ImageView>
                             <VBox styleClass="about-info">
-                                <Label fx:id="authorName" text="Это Валерий" styleClass="about-text"/>
-                                <Label fx:id="authorDescription" text="Люблю javafx тут должны быть картинки ссылки но да пошло оно" wrapText="true" styleClass="about-text"/>
+                                <Label fx:id="authorName2" styleClass="about-text"/>
+                                <Label fx:id="authorDescription2" wrapText="true" styleClass="about-text"/>
                             </VBox>
 
                             <!-- Правый гибкий отступ -->
                             <Region styleClass="flexible-region"/>
                         </HBox>
                     </VBox>
+
+                    <Label fx:id="footerHeader" styleClass="main-section"/>
+
+                    <VBox fx:id="footer" styleClass="footer ">
+                        <Label fx:id="footerText" wrapText="true" styleClass="footer-text"/>
+                    </VBox>
+
                 </VBox>
             </HBox>
         </ScrollPane>

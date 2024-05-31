@@ -205,10 +205,20 @@ ScrollPane {
     -fx-background-radius: 0;
 }
 
-.scroll-pane .scroll-bar:vertical .thumb {
+.scroll-bar:horizontal {
+    -fx-background-color: transparent;
+
+}
+
+.scroll-pane, .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.thumb{
     -fx-background-color: grey;
     -fx-pref-width: 10px;
     -fx-border-radius: 2px;
+
 }
 
 .scroll-pane .scroll-bar:vertical .increment-button,
@@ -251,4 +261,20 @@ ScrollPane {
     -fx-padding: 50 0 30 0;
     -fx-translate-x: -20;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
