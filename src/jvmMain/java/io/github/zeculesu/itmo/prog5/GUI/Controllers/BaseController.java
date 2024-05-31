@@ -9,7 +9,11 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public abstract class BaseController {
-    protected UDPGui udpGui;
+    protected UDPGui udpGui = new UDPGui("127.0.0.1",45002);
+
+    private static String password;
+
+    private static String login;
 
     public void setUdpClient(UDPGui udpClient) {
         this.udpGui = udpClient;
@@ -24,6 +28,22 @@ public abstract class BaseController {
             throw new RuntimeException(ex);
         }
         currentStage.close();
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getLogin() {
+        return login;
     }
 }
 
