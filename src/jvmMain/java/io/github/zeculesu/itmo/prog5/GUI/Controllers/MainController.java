@@ -1,6 +1,10 @@
 package io.github.zeculesu.itmo.prog5.GUI.Controllers;
 import io.github.zeculesu.itmo.prog5.GUI.Controllers.BaseController;
 import io.github.zeculesu.itmo.prog5.GUI.UDPGui;
+import io.github.zeculesu.itmo.prog5.GUI.Windows.LogIn;
+import io.github.zeculesu.itmo.prog5.GUI.Windows.Main;
+import io.github.zeculesu.itmo.prog5.GUI.Windows.MapMarines;
+import io.github.zeculesu.itmo.prog5.GUI.Windows.Table;
 import io.github.zeculesu.itmo.prog5.models.Request;
 import io.github.zeculesu.itmo.prog5.models.Response;
 import javafx.fxml.FXML;
@@ -11,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.SocketException;
@@ -34,6 +39,9 @@ public class MainController extends BaseController{
     private Button catalogButton;
 
     @FXML
+    private Button tableButton;
+
+    @FXML
     private Button workshopButton;
 
     @FXML
@@ -41,6 +49,7 @@ public class MainController extends BaseController{
 
     @FXML
     private Label myGangsLabel;
+
 
     @FXML
     private VBox myGangsBox;
@@ -86,10 +95,46 @@ public class MainController extends BaseController{
     @FXML
     private ImageView imageView;
 
+    @FXML
+    private VBox content;
+
 
 
     @FXML
     public void initialize() {
-        // Bind the width of the ImageView to the width of its parent container
+
+        tableButton.setOnAction(e -> {
+            Table Table = new Table();
+            Stage currentStage = (Stage) tableButton.getScene().getWindow();
+            try {
+                Table.start(new Stage());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+            currentStage.close();
+        });
+        catalogButton.setOnAction(e -> {
+            MapMarines Table = new MapMarines();
+            Stage currentStage = (Stage) tableButton.getScene().getWindow();
+            try {
+                Table.start(new Stage());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+            currentStage.close();
+        });
+        wallButton.setOnAction(e ->{
+            Main main = new Main();
+            Stage currentStage = (Stage) wallButton.getScene().getWindow();
+            try {
+                main.start(new Stage());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+            currentStage.close();
+        });
     }
+
+
+
 }

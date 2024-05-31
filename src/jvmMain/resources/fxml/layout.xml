@@ -17,7 +17,8 @@
         <Label fx:id="sidebarTitle" text="Space thunder" styleClass="sidebar-title"/>
         <VBox fx:id="sidebarButtons" styleClass="sidebar-buttons">
             <Button fx:id="wallButton" text="Стена" styleClass="sidebar-button"/>
-            <Button fx:id="catalogButton" text="Каталог" styleClass="sidebar-button"/>
+            <Button fx:id="catalogButton" text="Карта" styleClass="sidebar-button"/>
+            <Button fx:id="tableButton" text="Таблица" styleClass="sidebar-button"/>
             <Button fx:id="workshopButton" text="Мастерская" styleClass="sidebar-button"/>
             <Button fx:id="settingsButton" text="Настройка" styleClass="sidebar-button"/>
         </VBox>
@@ -29,7 +30,7 @@
             <TextField fx:id="userTextField" promptText="Поиск" styleClass="header-search"/>
         </VBox>
         <ScrollPane styleClass="scroll-pane" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS">
-            <HBox styleClass="content-padding">
+            <HBox styleClass="content-padding" VBox.vgrow="ALWAYS">
                 <VBox fx:id="content" styleClass="content">
                     <!-- Content will be added here dynamically -->
                 </VBox>

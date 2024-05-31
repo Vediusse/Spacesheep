@@ -22,7 +22,8 @@
         <Label fx:id="sidebarTitle" text="Space thunder" styleClass="sidebar-title"/>
         <VBox fx:id="sidebarButtons" styleClass="sidebar-buttons">
             <Button fx:id="wallButton" text="Стена" styleClass="sidebar-button"/>
-            <Button fx:id="catalogButton" text="Каталог" styleClass="sidebar-button"/>
+            <Button fx:id="catalogButton" text="Карта" styleClass="sidebar-button"/>
+            <Button fx:id="tableButton" text="Таблица" styleClass="sidebar-button"/>
             <Button fx:id="workshopButton" text="Мастерская" styleClass="sidebar-button"/>
             <Button fx:id="settingsButton" text="Настройка" styleClass="sidebar-button"/>
         </VBox>
@@ -34,17 +35,17 @@
             <TextField fx:id="userTextField" promptText="Поиск" styleClass="header-search"/>
         </VBox>
         <ScrollPane styleClass="scroll-pane" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS">
-            <HBox styleClass="content-padding">
+            <HBox styleClass="content-padding" VBox.vgrow="ALWAYS">
                 <VBox fx:id="content" styleClass="content">
                     <Label fx:id="mainHeader" text="Главная страница" styleClass="main-header"/>
 
-                    <Pane fx:id="imageContainer" styleClass="image-container">
+                    <Pane fx:id="imageContainer" styleClass="image-container content-wrapper">
                         <ImageView fx:id="imageView" styleClass="image-view">
-                            <Image url="@/img/frameBorder.png"/>
+                            <Image url="@/img/javafx.png"/>
                         </ImageView>
                     </Pane>
 
-                    <Label fx:id="aboutHeader" text="Об авторе" styleClass="main-header"/>
+                    <Label fx:id="aboutHeader" text="Об авторе" styleClass="main-section"/>
 
                     <VBox fx:id="buttons" styleClass="about">
                         <HBox styleClass="about-card">
@@ -81,6 +82,13 @@
                             <Region styleClass="flexible-region"/>
                         </HBox>
                     </VBox>
+
+                    <Label fx:id="footerHeader" text="Ого! Вас тут быть не должно..." styleClass="main-section"/>
+
+                    <VBox fx:id="buttons" styleClass="footer ">
+                        <Label fx:id="authorDescription" text="Приложения будет получать регулярные Обновления, Фиксы, и Море контента и еще больше пунктуационных ошибок, До нового обнолвения осталось: своевременно часов Своевременно минут" wrapText="true" styleClass="footer-text"/>
+                    </VBox>
+
                 </VBox>
             </HBox>
         </ScrollPane>
