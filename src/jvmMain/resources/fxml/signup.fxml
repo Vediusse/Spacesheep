@@ -8,33 +8,33 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="io.github.zeculesu.itmo.prog5.GUI.Controllers.LogInController" styleClass="root">
+<HBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="io.github.zeculesu.itmo.prog5.GUI.Controllers.SignUpController" styleClass="root">
     <HBox styleClass="hbox-layout">
         <VBox alignment="CENTER" spacing="20.0" styleClass="vbox-register">
             <!-- Заголовок -->
-            <Label text="Войти" styleClass="label-header"/>
+            <Label fx:id="registerTitle" styleClass="label-header"/>
 
             <!-- Поле для логина -->
-            <TextField fx:id="userTextField" promptText="Логин" styleClass="text-field"/>
+            <TextField fx:id="userTextField" styleClass="text-field"/>
 
             <!-- Поле для пароля -->
-            <PasswordField fx:id="pwBox" promptText="Пароль" styleClass="password-field"/>
+            <PasswordField fx:id="pwBox" styleClass="password-field"/>
 
             <!-- Сообщение об ошибке -->
-            <Label fx:id="errorLabel" text="Какая-то ошибка" styleClass="error-label"/>
+            <Label fx:id="errorLabel" styleClass="error-label"/>
 
             <!-- Кнопка регистрации -->
-            <Button fx:id="signUpButton" text="Войти" styleClass="button"/>
+            <Button fx:id="signUpButton" styleClass="button"/>
 
             <!-- Ссылка для входа -->
-            <Hyperlink fx:id="signInLink" text="Регистрация" styleClass="hyperlink"/>
+            <Hyperlink fx:id="signInLink" styleClass="hyperlink"/>
         </VBox>
 
-        <!-- добавление изображения -->
+        <!-- Добавление изображения -->
         <ImageView fitHeight="300" fitWidth="300" styleClass="image-view">
             <image>
                 <Image url="@/img/rocket.png"/>
             </image>
         </ImageView>
     </HBox>
-</VBox>
+</HBox>

@@ -11,7 +11,6 @@ fun main(argv: Array<String>) {
     val port = 45000
     val udpClient = UDPGui(host, port)
 
-
     // Запустите приложение
-    Application.launch(MapMarines::class.java, *argv)
+    Application.launch(LogIn::class.java, *argv)
 }

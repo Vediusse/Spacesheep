@@ -12,7 +12,7 @@ public class MapMarines extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         // Загружаем основной FXML файл
-        FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("/fxml/layout.xml"));
+        FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("/fxml/layout.fxml"));
         Parent mainRoot = mainLoader.load();
 
         // Загружаем FXML файл с координатной плоскостью
