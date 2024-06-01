@@ -74,6 +74,7 @@ public class AuthCheckSpaceMarineCollection implements SpaceMarineCollection {
 
     @Override
     public SpaceMarine removeHead() throws EmptyCollectionException {
+
         throw new OwnershipException();
     }
 
