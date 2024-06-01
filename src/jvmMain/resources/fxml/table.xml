@@ -16,7 +16,7 @@
 
     <!-- Sidebar -->
     <VBox fx:id="sidebar" styleClass="sidebar">
-        <Label fx:id="sidebarTitle" text="Space thunder" styleClass="sidebar-title"/>
+        <Label fx:id="sidebarTitle" text="SpaceMartini" styleClass="sidebar-title"/>
         <VBox fx:id="sidebarButtons" styleClass="sidebar-buttons">
             <Button fx:id="wallButton" text="Стена" styleClass="sidebar-button"/>
             <Button fx:id="catalogButton" text="Карта" styleClass="sidebar-button"/>

@@ -40,7 +40,11 @@ public class LogInController extends BaseController {
 
     @FXML
     public void initialize() {
-        setLocale(Locale.getDefault());
+        this.bundle = ResourceManager.getInstance().getResourceBundle();
+        this.updateTexts();
+        ResourceManager.getInstance().localeProperty().addListener((observable, oldValue, newValue) -> {
+            updateTexts();
+        });
         errorLabel.setVisible(false);
 
         signUpButton.setOnAction(e -> {
