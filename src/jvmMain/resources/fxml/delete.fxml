@@ -54,8 +54,8 @@
 
                 <HBox alignment="CENTER" style="-fx-spacing: 20; -fx-padding: 20 0 0 0">
                     <Button text="Удалить выбранный элемент" style="-fx-spacing: 20" onAction="#deleteId"/>
-                    <Button text="Удалить Первый элемент" onAction="#deleteFirst"/>
-                    <Button text="Удалить Последний элемент" onAction="#deleteLast"/>
+                    <Button text="Удалить Первый записи" onAction="#deleteFirst"/>
+                    <Button text="Удалить новые записи" onAction="#deleteLast"/>
                 </HBox>
 
             </VBox>

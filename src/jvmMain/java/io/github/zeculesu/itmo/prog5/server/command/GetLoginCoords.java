@@ -31,6 +31,7 @@ public class GetLoginCoords extends AbstractCommand {
                 loginCoord.put(login, coordList);
             }
         }
+        response.setStatus(200);
         response.setLoginCoord(loginCoord);
         return response;
     }

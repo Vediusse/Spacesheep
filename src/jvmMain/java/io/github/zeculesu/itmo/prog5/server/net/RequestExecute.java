@@ -47,6 +47,7 @@ public class RequestExecute {
 
         // проверка на регистрацию
         CommandAction comm = new AuthCommand();
+        System.out.println(request.getPassword());
         Response response = comm.execute(collection, env, new String[]{request.getLogin() + " " + request.getPassword()});
         if (response.getStatus() != 200) {
             Response r = new Response();

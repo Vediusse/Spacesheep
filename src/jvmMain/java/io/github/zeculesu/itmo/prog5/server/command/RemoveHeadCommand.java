@@ -25,6 +25,7 @@ public class RemoveHeadCommand extends AbstractCommand {
         } catch (EmptyCollectionException e) {
             response.setError(e.getMessage());
         } catch (OwnershipException e){
+
             response.setError("Вы не можете модифицировать не свои объекты");
         }
         return response;

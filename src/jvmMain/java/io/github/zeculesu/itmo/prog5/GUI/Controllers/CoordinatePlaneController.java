@@ -54,7 +54,8 @@ public class CoordinatePlaneController extends BaseController {
 
     public void initialize() {
         try {
-            this.loginCoord = udpGui.sendMeLoginCoords(this.getLogin(), this.getPassword()).getLoginCoord();
+            System.out.println(this.getPassword());
+            this.loginCoord = udpGui.sendMeLoginCoords(this.getLogin(),this.getPassword()).getLoginCoord();
         } catch (Exception e) {
             this.loginCoord = new HashMap<>();
             ArrayList<Coordinates> coordList = new ArrayList<>();
@@ -119,7 +120,6 @@ public class CoordinatePlaneController extends BaseController {
     }
 
     private void drawPoints(GraphicsContext gc, double width, double height) {
-
         if (loginCoord != null) { // Add null check here
             // Proceed with drawing points
             for (String login : loginCoord.keySet()) {
@@ -130,7 +130,6 @@ public class CoordinatePlaneController extends BaseController {
                     gc.setFill(color);
                     gc.fillOval(scaledX - POINT_RADIUS, scaledY - POINT_RADIUS, 2 * POINT_RADIUS, 2 * POINT_RADIUS);
                 }
-
             }
         }
     }
