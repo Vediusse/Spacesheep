@@ -13,7 +13,8 @@ public class AddForm extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/fxml/add.fxml")));
+
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/add.fxml"));
         Scene scene = new Scene(root, 1080, 640); // Размер окна
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/style/add.css")).toExternalForm());
 

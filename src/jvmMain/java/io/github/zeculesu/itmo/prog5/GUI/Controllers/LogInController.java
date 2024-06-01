@@ -69,7 +69,9 @@ public class LogInController extends BaseController {
                     sendData = UDPGui.castToByte(request);
                     udpGui.sendPacket(sendData);
                     response = udpGui.getResponse();
-                } catch (IOException | ClassNotFoundException ex) {
+                }
+
+                catch (IOException | ClassNotFoundException ex) {
                     throw new RuntimeException(ex);
                 }
                 udpGui.closeClientSocket();

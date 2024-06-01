@@ -1,6 +1,7 @@
 package io.github.zeculesu.itmo.prog5.GUI.Controllers;
 
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Table;
+import javafx.scene.control.Button;
 import io.github.zeculesu.itmo.prog5.models.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,33 +14,83 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class AddController extends BaseController {
+
     @FXML
-    public Label errorLabel;
+    private Label titleLabel;
+
     @FXML
-    public TextField chapterLField;
+    private Label nameErrorLabel;
+
+    @FXML
+    private Label coordinatesXErrorLabel;
+
+    @FXML
+    private Label coordinatesYErrorLabel;
+
+    @FXML
+    private Label healthErrorLabel;
+
+    @FXML
+    private Label categoryErrorLabel;
+
+    @FXML
+    private Label weaponTypeErrorLabel;
+
+    @FXML
+    private Label meleeWeaponErrorLabel;
+
+    @FXML
+    private Label chapterErrorLabel;
+
+    @FXML
+    private Label chapterLErrorLabel;
+
+    @FXML
+    private Label errorLabel;
+
     @FXML
     private TextField nameField;
+
     @FXML
     private TextField coordinatesXField;
+
     @FXML
     private TextField coordinatesYField;
+
     @FXML
     private TextField healthField;
+
     @FXML
     private TextField categoryField;
+
     @FXML
     private TextField weaponTypeField;
+
     @FXML
     private TextField meleeWeaponField;
+
     @FXML
     private TextField chapterField;
+
+    @FXML
+    private TextField chapterLField;
+
+    @FXML
+    private Button createButton;
+
+    @FXML
+    private Button cancelButton;
 
     private List<TextField> textFields = new ArrayList<>();
 
     @FXML
     public void initialize() {
+        Locale.setDefault(new Locale("ru", "RU"));
+        setLocale(Locale.getDefault());
         errorLabel.setVisible(false);
     }
 
@@ -100,5 +151,33 @@ public class AddController extends BaseController {
             throw new RuntimeException(ex);
         }
         currentStage.close();
+    }
+    public void setLocale(Locale locale) {
+        bundle = ResourceBundle.getBundle("messages", locale);
+        updateTexts();
+    }
+    public void updateTexts(){
+        titleLabel.setText(bundle.getString("createNewShip"));
+        nameField.setPromptText(bundle.getString("namePrompt"));
+        nameErrorLabel.setText(bundle.getString("nameError"));
+        coordinatesXField.setPromptText(bundle.getString("coordinatesXPrompt"));
+        coordinatesXErrorLabel.setText(bundle.getString("coordinatesXError"));
+        coordinatesYField.setPromptText(bundle.getString("coordinatesYPrompt"));
+        coordinatesYErrorLabel.setText(bundle.getString("coordinatesYError"));
+        healthField.setPromptText(bundle.getString("healthPrompt"));
+        healthErrorLabel.setText(bundle.getString("healthError"));
+        categoryField.setPromptText(bundle.getString("categoryPrompt"));
+        categoryErrorLabel.setText(bundle.getString("categoryError"));
+        weaponTypeField.setPromptText(bundle.getString("weaponTypePrompt"));
+        weaponTypeErrorLabel.setText(bundle.getString("weaponTypeError"));
+        meleeWeaponField.setPromptText(bundle.getString("meleeWeaponPrompt"));
+        meleeWeaponErrorLabel.setText(bundle.getString("meleeWeaponError"));
+        chapterField.setPromptText(bundle.getString("chapterPrompt"));
+        chapterErrorLabel.setText(bundle.getString("chapterError"));
+        chapterLField.setPromptText(bundle.getString("chapterLPrompt"));
+        chapterLErrorLabel.setText(bundle.getString("chapterLError"));
+        errorLabel.setText(bundle.getString("errorLabel"));
+        createButton.setText(bundle.getString("createButton"));
+        cancelButton.setText(bundle.getString("cancelButton"));
     }
 }
