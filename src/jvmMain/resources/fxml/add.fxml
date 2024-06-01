@@ -5,58 +5,57 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.layout.HBox?>
+
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="io.github.zeculesu.itmo.prog5.GUI.Controllers.AddController"
             prefHeight="400.0" prefWidth="600.0">
     <VBox alignment="CENTER" style="-fx-padding: 0 0 20 50" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
-        <Label text="Создание нового корабля" styleClass="title"/>
+        <Label fx:id="titleLabel" styleClass="title"/>
         <VBox fx:id="formContainer" spacing="10.0" alignment="CENTER_LEFT">
-            <!-- Fields will be added here dynamically -->
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <TextField promptText="Имя" fx:id="nameField" prefWidth="300"/>
-                <Label text="Имя не должно быть пустым" />
+                <TextField fx:id="nameField" prefWidth="300"/>
+                <Label fx:id="nameErrorLabel"/>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <TextField promptText="Координаты X" fx:id="coordinatesXField" prefWidth="300"/>
-                <Label text="X не должно быть пустым" />
+                <TextField fx:id="coordinatesXField" prefWidth="300"/>
+                <Label fx:id="coordinatesXErrorLabel"/>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <TextField promptText="Координаты Y" fx:id="coordinatesYField" prefWidth="300"/>
-                <Label text="Y должно быть больше -67" />
+                <TextField fx:id="coordinatesYField" prefWidth="300"/>
+                <Label fx:id="coordinatesYErrorLabel"/>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <TextField promptText="Здоровье" fx:id="healthField" prefWidth="300"/>
-                <Label text="Hp должно быть больше 0" />
+                <TextField fx:id="healthField" prefWidth="300"/>
+                <Label fx:id="healthErrorLabel"/>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <TextField promptText="Категория" fx:id="categoryField" prefWidth="300"/>
-                <Label text="Категории: Scout, Suppressor, Librarian, Helix" />
+                <TextField fx:id="categoryField" prefWidth="300"/>
+                <Label fx:id="categoryErrorLabel"/>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <TextField promptText="Тип оружия" fx:id="weaponTypeField" prefWidth="300"/>
-                <Label text="Оружие: Boltgun, Heavy Boltgun, BOLT RIFLE, FLamer" />
+                <TextField fx:id="weaponTypeField" prefWidth="300"/>
+                <Label fx:id="weaponTypeErrorLabel"/>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <TextField promptText="Тип оружия ближнего боя" fx:id="meleeWeaponField" prefWidth="300"/>
-                <Label text="Бл. Оружие: Chain sword, Power sword, Chain Axe" />
+                <TextField fx:id="meleeWeaponField" prefWidth="300"/>
+                <Label fx:id="meleeWeaponErrorLabel"/>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <TextField promptText="Глава" fx:id="chapterField" prefWidth="300"/>
-                <Label text="Имя не должно быть пустым" />
+                <TextField fx:id="chapterField" prefWidth="300"/>
+                <Label fx:id="chapterErrorLabel"/>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <TextField promptText="Глава парент" fx:id="chapterLField" prefWidth="300"/>
-                <Label text="Имя не должно быть пустым" />
+                <TextField fx:id="chapterLField" prefWidth="300"/>
+                <Label fx:id="chapterLErrorLabel"/>
             </HBox>
         </VBox>
 
-        <Label fx:id="errorLabel" text="Какая-то ошибка" styleClass="error-label"/>
+        <Label fx:id="errorLabel" styleClass="error-label"/>
 
         <HBox alignment="CENTER" style="-fx-spacing: 20">
-            <Button text="Создать" style="-fx-spacing: 20" onAction="#handleSubmit"/>
-            <Button text="Отменить" onAction="#back"/>
+            <Button fx:id="createButton" style="-fx-spacing: 20" onAction="#handleSubmit"/>
+            <Button fx:id="cancelButton" onAction="#back"/>
         </HBox>
 
     </VBox>

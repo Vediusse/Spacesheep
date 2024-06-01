@@ -8,11 +8,15 @@ import io.github.zeculesu.itmo.prog5.client.UDPClient;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 public abstract class BaseController {
     protected UDPGui udpGui = new UDPGui("127.0.0.1",45003);
     private static String password;
 
     private static String login;
+    public ResourceBundle bundle;
 
 
     public void setUdpClient(UDPGui udpClient) {
@@ -45,5 +49,11 @@ public abstract class BaseController {
     public String getLogin() {
         return login;
     }
+
+    public void setLocale(Locale locale) {
+        bundle = ResourceBundle.getBundle("messages", locale);
+        updateTexts();
+    }
+    private void updateTexts() {}
 }
 
