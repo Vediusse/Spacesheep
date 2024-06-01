@@ -15,7 +15,6 @@ public abstract class BaseController {
     private static String login;
 
 
-
     public void setUdpClient(UDPGui udpClient) {
         this.udpGui = udpClient;
     }

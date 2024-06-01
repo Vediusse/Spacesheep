@@ -137,9 +137,6 @@ public class MainController extends BaseController {
             }
             currentStage.close();
         });
-
-
-
         workshopButton.setOnAction(e->{
             Cruds main = new Cruds();
             Stage currentStage = (Stage) workshopButton.getScene().getWindow();
@@ -153,8 +150,6 @@ public class MainController extends BaseController {
         if(mainHeader!=null){
             this.mainHeader.setText("Приветствую, " + this.getLogin());
         }
-
-
 
         Locale.setDefault(new Locale("ru", "RU"));
         setLocale(Locale.getDefault());
