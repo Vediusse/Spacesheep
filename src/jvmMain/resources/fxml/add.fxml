@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.HBox?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="io.github.zeculesu.itmo.prog5.GUI.Controllers.AddController"
+            prefHeight="400.0" prefWidth="600.0">
+    <VBox alignment="CENTER" style="-fx-padding: 0 0 20 50" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+        <Label text="Создание нового корабля" styleClass="title"/>
+        <VBox fx:id="formContainer" spacing="10.0" alignment="CENTER_LEFT">
+            <!-- Fields will be added here dynamically -->
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <TextField promptText="Имя" fx:id="nameField" prefWidth="300"/>
+                <Label text="Имя не должно быть пустым" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <TextField promptText="Координаты X" fx:id="coordinatesXField" prefWidth="300"/>
+                <Label text="X не должно быть пустым" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <TextField promptText="Координаты Y" fx:id="coordinatesYField" prefWidth="300"/>
+                <Label text="Y должно быть больше -67" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <TextField promptText="Здоровье" fx:id="healthField" prefWidth="300"/>
+                <Label text="Hp должно быть больше 0" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <TextField promptText="Категория" fx:id="categoryField" prefWidth="300"/>
+                <Label text="Категории: Scout, Suppressor, Librarian, Helix" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <TextField promptText="Тип оружия" fx:id="weaponTypeField" prefWidth="300"/>
+                <Label text="Оружие: Boltgun, Heavy Boltgun, BOLT RIFLE, FLamer" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <TextField promptText="Тип оружия ближнего боя" fx:id="meleeWeaponField" prefWidth="300"/>
+                <Label text="Бл. Оружие: Chain sword, Power sword, Chain Axe" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <TextField promptText="Глава" fx:id="chapterField" prefWidth="300"/>
+                <Label text="Имя не должно быть пустым" />
+            </HBox>
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <TextField promptText="Глава парент" fx:id="chapterLField" prefWidth="300"/>
+                <Label text="Имя не должно быть пустым" />
+            </HBox>
+        </VBox>
+
+        <Label fx:id="errorLabel" text="Какая-то ошибка" styleClass="error-label"/>
+
+        <HBox alignment="CENTER" style="-fx-spacing: 20">
+            <Button text="Создать" style="-fx-spacing: 20" onAction="#handleSubmit"/>
+            <Button text="Отменить" onAction="#back"/>
+        </HBox>
+
+    </VBox>
+</AnchorPane>

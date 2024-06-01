@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="io.github.zeculesu.itmo.prog5.GUI.Controllers.CrudsController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <Label fx:id="mainHeader" text="Мастерская" styleClass="main-header"
+           AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0"/>
+
+    <HBox styleClass="create-ship-container"
+          AnchorPane.topAnchor="80.0" AnchorPane.leftAnchor="10.0"
+          spacing="20"> <!-- Здесь задано расстояние между элементами внутри HBox -->
+        <VBox alignment="CENTER" spacing="10" styleClass="cruds-buttons">
+            <Button fx:id="createButton" text="+" onAction="#handleCreate" styleClass="create-button"/>
+            <Text text="Создать новый корабль" styleClass="create-ship-text"/>
+        </VBox>
+        <VBox alignment="CENTER" spacing="10" styleClass="cruds-buttons">
+            <Button fx:id="deleteButton" text="-" onAction="#handleDelete" styleClass="create-button"/>
+            <Text text="Создать новый корабль" styleClass="create-ship-text"/>
+        </VBox>
+        <VBox alignment="CENTER" spacing="10" styleClass="cruds-buttons">
+            <Button fx:id="findButton" text="?" onAction="#handleFind" styleClass="create-button"/>
+            <Text text="Создать новый корабль" styleClass="create-ship-text"/>
+        </VBox>
+    </HBox>
+
+
+</AnchorPane>

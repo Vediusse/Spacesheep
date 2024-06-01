@@ -2,10 +2,7 @@ package io.github.zeculesu.itmo.prog5.GUI.Controllers;
 
 import io.github.zeculesu.itmo.prog5.GUI.Controllers.BaseController;
 import io.github.zeculesu.itmo.prog5.GUI.UDPGui;
-import io.github.zeculesu.itmo.prog5.GUI.Windows.LogIn;
-import io.github.zeculesu.itmo.prog5.GUI.Windows.Main;
-import io.github.zeculesu.itmo.prog5.GUI.Windows.MapMarines;
-import io.github.zeculesu.itmo.prog5.GUI.Windows.Table;
+import io.github.zeculesu.itmo.prog5.GUI.Windows.*;
 import io.github.zeculesu.itmo.prog5.models.Request;
 import io.github.zeculesu.itmo.prog5.models.Response;
 import javafx.fxml.FXML;
@@ -140,6 +137,20 @@ public class MainController extends BaseController {
             }
             currentStage.close();
         });
+        workshopButton.setOnAction(e->{
+            Cruds main = new Cruds();
+            Stage currentStage = (Stage) workshopButton.getScene().getWindow();
+            try {
+                main.start(new Stage());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+            currentStage.close();
+        });
+        if(mainHeader!=null){
+            this.mainHeader.setText("Приветствую, " + this.getLogin());
+        }
+
         Locale.setDefault(new Locale("ru", "RU"));
         setLocale(Locale.getDefault());
     }

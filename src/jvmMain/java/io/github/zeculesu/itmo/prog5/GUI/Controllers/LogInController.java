@@ -75,6 +75,8 @@ public class LogInController extends BaseController {
                 udpGui.closeClientSocket();
 
                 if (response.getStatus() == 200) {
+                    this.setLogin(userTextField.getText());
+                    this.setPassword(pwBox.getText());
                     this.goToMain(this.signUpButton);
                 }else {
                     errorLabel.setVisible(true);

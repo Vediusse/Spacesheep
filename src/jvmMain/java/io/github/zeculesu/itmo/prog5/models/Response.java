@@ -1,5 +1,6 @@
 package io.github.zeculesu.itmo.prog5.models;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,9 @@ import java.util.Map;
  * Ответ получаемый после выполнения команды
  */
 public class Response implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 4830074588962352699L;
 
     private int status = 0;
     private String message;

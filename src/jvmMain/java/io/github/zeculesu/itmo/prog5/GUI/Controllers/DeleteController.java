@@ -1,22 +1,22 @@
 package io.github.zeculesu.itmo.prog5.GUI.Controllers;
 
-import io.github.zeculesu.itmo.prog5.GUI.UDPGui;
-
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Cruds;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Main;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.MapMarines;
+import io.github.zeculesu.itmo.prog5.GUI.Windows.Table;
+import io.github.zeculesu.itmo.prog5.models.Request;
+import io.github.zeculesu.itmo.prog5.models.Response;
+import io.github.zeculesu.itmo.prog5.models.SpaceMarine;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.VBox;
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.scene.control.cell.PropertyValueFactory;
-import io.github.zeculesu.itmo.prog5.models.SpaceMarine;
-import io.github.zeculesu.itmo.prog5.models.Request;
-import io.github.zeculesu.itmo.prog5.models.Response;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,7 +25,7 @@ import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-public class TableController extends BaseController {
+public class DeleteController extends BaseController {
 
     @FXML
     private VBox content;
@@ -111,17 +111,16 @@ public class TableController extends BaseController {
 
 
 
-        wallButton.setOnAction(e -> {
-            Main main = new Main();
-            Stage currentStage = (Stage) wallButton.getScene().getWindow();
+        tableButton.setOnAction(e -> {
+            Table Table = new Table();
+            Stage currentStage = (Stage) tableButton.getScene().getWindow();
             try {
-                main.start(new Stage());
+                Table.start(new Stage());
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
             currentStage.close();
         });
-
         catalogButton.setOnAction(e -> {
             MapMarines Table = new MapMarines();
             Stage currentStage = (Stage) tableButton.getScene().getWindow();
@@ -132,8 +131,16 @@ public class TableController extends BaseController {
             }
             currentStage.close();
         });
-
-
+        wallButton.setOnAction(e ->{
+            Main main = new Main();
+            Stage currentStage = (Stage) wallButton.getScene().getWindow();
+            try {
+                main.start(new Stage());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+            currentStage.close();
+        });
         workshopButton.setOnAction(e->{
             Cruds main = new Cruds();
             Stage currentStage = (Stage) workshopButton.getScene().getWindow();
@@ -145,6 +152,7 @@ public class TableController extends BaseController {
             currentStage.close();
         });
 
+
     }
 
     private ObservableList<SpaceMarine> getData() {
@@ -155,7 +163,6 @@ public class TableController extends BaseController {
             request.setCommand("show");
             request.setLogin(this.getLogin());
             request.setPassword(this.getPassword());
-
             Response response = udpGui.sendRequest(request);
             data.addAll(response.getOutputElement());
 
@@ -167,7 +174,63 @@ public class TableController extends BaseController {
         return data;
     }
 
-}
 
-}
+    public void deleteLast(ActionEvent actionEvent) {
+        try {
+            udpGui.createSocket();
+            Request request = new Request();
+            request.setCommand("remove_lower");
+            request.setLogin(this.getLogin());
+            request.setPassword(this.getPassword());
+            Response response = udpGui.sendRequest(request);
+            tableView.setItems(getData());
+        }catch (SocketException | UnknownHostException e) {
+            throw new RuntimeException(e);
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
+    }
+
+    public void deleteFirst(ActionEvent actionEvent) {
+        try {
+            udpGui.createSocket();
+            Request request = new Request();
+            request.setCommand("remove_head");
+            request.setLogin(this.getLogin());
+            request.setPassword(this.getPassword());
+            Response response = udpGui.sendRequest(request);
+            System.out.println(request.getPassword());
+            tableView.setItems(getData());
+        }catch (SocketException | UnknownHostException e) {
+            throw new RuntimeException(e);
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deleteId(ActionEvent actionEvent) {
+
+        SpaceMarine selectedItem = tableView.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            try {
+                int id = selectedItem.getId();
+                udpGui.createSocket();
+                Request request = new Request();
+                request.setCommand("remove_by_id");
+                request.setArg(Integer.toString(selectedItem.getId()));
+                request.setLogin(this.getLogin());
+                request.setPassword(this.getPassword());
+                Response response = udpGui.sendRequest(request);
+                tableView.setItems(getData());
+            } catch (SocketException | UnknownHostException e) {
+                throw new RuntimeException(e);
+            } catch (IOException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("Ничего не выбрано.");
+        }
+
+    }
+}

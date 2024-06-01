@@ -54,7 +54,7 @@ public class CoordinatePlaneController extends BaseController {
 
     public void initialize() {
         try {
-            this.loginCoord = udpGui.sendMeLoginCoords().getLoginCoord();
+            this.loginCoord = udpGui.sendMeLoginCoords(this.getLogin(),this.getPassword()).getLoginCoord();
         } catch (Exception e) {
             this.loginCoord = new HashMap<>();
             ArrayList<Coordinates> coordList = new ArrayList<>();
@@ -119,18 +119,21 @@ public class CoordinatePlaneController extends BaseController {
     }
 
     private void drawPoints(GraphicsContext gc, double width, double height) {
-        // Переводим координаты точек в координаты на холсте с учетом масштаба и смещения
-        for (String login : loginCoord.keySet()) {
-            Color color = Color.color(Math.random(), Math.random(), Math.random());
-            for (Coordinates point : loginCoord.get(login)) {
 
-                double scaledX = width / 2 + point.getX() * SCALE + dragOffsetX;
-                double scaledY = height / 2 - point.getY() * SCALE + dragOffsetY; // Инвертируем y и учитываем масштаб
-                gc.setFill(color);
-                gc.fillOval(scaledX - POINT_RADIUS, scaledY - POINT_RADIUS, 2 * POINT_RADIUS, 2 * POINT_RADIUS);
+        if (loginCoord != null) { // Add null check here
+            // Proceed with drawing points
+            for (String login : loginCoord.keySet()) {
+                Color color = Color.color(Math.random(), Math.random(), Math.random());
+                for (Coordinates point : loginCoord.get(login)) {
+                    double scaledX = width / 2 + point.getX() * SCALE + dragOffsetX;
+                    double scaledY = height / 2 - point.getY() * SCALE + dragOffsetY; // Инвертируем y и учитываем масштаб
+                    gc.setFill(color);
+                    gc.fillOval(scaledX - POINT_RADIUS, scaledY - POINT_RADIUS, 2 * POINT_RADIUS, 2 * POINT_RADIUS);
+                }
+
             }
         }
-    }
+
 
     private void onPointClicked(MouseEvent event) {
         double mouseX = event.getX();

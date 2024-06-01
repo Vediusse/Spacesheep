@@ -14,6 +14,7 @@ public class RequestExecute {
     public static Response requestExecute(ConsoleCommandEnvironment env, Map clientCollections, Request request) {
         String login = request.getLogin();
 
+
         if (!clientCollections.containsKey(login)) {
             // Создание новой коллекции для клиента
             clientCollections.put(login, new AuthCheckSpaceMarineCollection(Server.cachedSpaceMarineCollection, login));

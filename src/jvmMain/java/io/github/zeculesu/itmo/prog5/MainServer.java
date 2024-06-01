@@ -14,7 +14,7 @@ public class MainServer {
                 new ShowCommand(), new UpdateCommand(), new InfoCommand(), new ExitCommand(), new HistoryCommand(), new ExecuteScriptCommand(), new GetLoginCoords());
         String fileName = System.getenv("FILENAME");
         DefaultConsoleCommandEnvironmentImpl env = new DefaultConsoleCommandEnvironmentImpl(commandSetMapClient, fileName);
-        Server server = new Server(env, 45000);
+        Server server = new Server(env, 45003);
         server.start();
     }
 }
