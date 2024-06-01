@@ -1,6 +1,5 @@
 package io.github.zeculesu.itmo.prog5.GUI.Controllers;
 
-import io.github.zeculesu.itmo.prog5.GUI.UDPGui;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Cruds;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Main;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.MapMarines;
@@ -79,14 +78,8 @@ public class TableController extends BaseController {
     @FXML
     private Button settingsButton;
 
-    private ResourceBundle resourceBundle;
-
     @FXML
     public void initialize() {
-        // Load the resource bundle for localization
-        Locale locale = new Locale("ru"); // You can change this to dynamically load based on user selection
-        resourceBundle = ResourceBundle.getBundle("messages", locale);
-
         // Initialize the table columns
         tableView.prefHeightProperty().bind(content.heightProperty().multiply(0.75));
 
@@ -115,21 +108,21 @@ public class TableController extends BaseController {
         tableView.setItems(data);
 
         // Set localized text
-        wallButton.setText(resourceBundle.getString("wallButton"));
-        catalogButton.setText(resourceBundle.getString("catalogButton"));
-        tableButton.setText(resourceBundle.getString("tableButton"));
-        workshopButton.setText(resourceBundle.getString("workshopButton"));
-        settingsButton.setText(resourceBundle.getString("settingsButton"));
-        nameColumn.setText(resourceBundle.getString("nameColumn"));
-        coordinatesColumn.setText(resourceBundle.getString("coordinatesColumn"));
-        creationDateColumn.setText(resourceBundle.getString("creationDateColumn"));
-        healthColumn.setText(resourceBundle.getString("healthColumn"));
-        categoryColumn.setText(resourceBundle.getString("categoryColumn"));
-        weaponTypeColumn.setText(resourceBundle.getString("weaponTypeColumn"));
-        meleeWeaponColumn.setText(resourceBundle.getString("meleeWeaponColumn"));
-        chapterNameColumn.setText(resourceBundle.getString("chapterNameColumn"));
-        chapterLegionColumn.setText(resourceBundle.getString("chapterLegionColumn"));
-        ownerColumn.setText(resourceBundle.getString("ownerColumn"));
+        wallButton.setText(bundle.getString("wallButton"));
+        catalogButton.setText(bundle.getString("catalogButton"));
+        tableButton.setText(bundle.getString("tableButton"));
+        workshopButton.setText(bundle.getString("workshopButton"));
+        settingsButton.setText(bundle.getString("settingsButton"));
+        nameColumn.setText(bundle.getString("nameColumn"));
+        coordinatesColumn.setText(bundle.getString("coordinatesColumn"));
+        creationDateColumn.setText(bundle.getString("creationDateColumn"));
+        healthColumn.setText(bundle.getString("healthColumn"));
+        categoryColumn.setText(bundle.getString("categoryColumn"));
+        weaponTypeColumn.setText(bundle.getString("weaponTypeColumn"));
+        meleeWeaponColumn.setText(bundle.getString("meleeWeaponColumn"));
+        chapterNameColumn.setText(bundle.getString("chapterNameColumn"));
+        chapterLegionColumn.setText(bundle.getString("chapterLegionColumn"));
+        ownerColumn.setText(bundle.getString("ownerColumn"));
 
         wallButton.setOnAction(e -> {
             Main main = new Main();

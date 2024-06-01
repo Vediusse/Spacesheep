@@ -150,9 +150,6 @@ public class MainController extends BaseController {
         if(mainHeader!=null){
             this.mainHeader.setText("Приветствую, " + this.getLogin());
         }
-
-        Locale.setDefault(new Locale("ru", "RU"));
-        setLocale(Locale.getDefault());
     }
 
     public void setLocale(Locale locale) {

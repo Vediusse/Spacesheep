@@ -17,9 +17,8 @@ public class AddForm extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         Locale locale = new Locale("mk", "MK"); // Измените на нужный язык, например, "es", "lt", "mk"
-        ResourceBundle bundle = ResourceBundle.getBundle("messages", locale);
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/add.fxml"), bundle);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/add.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root, 1080, 640); // Размер окна
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/style/add.css")).toExternalForm());
