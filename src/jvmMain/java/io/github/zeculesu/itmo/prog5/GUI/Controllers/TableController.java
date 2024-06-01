@@ -169,5 +169,3 @@ public class TableController extends BaseController {
 
 }
 
-}
-
