@@ -1,6 +1,7 @@
 package io.github.zeculesu.itmo.prog5.GUI.Controllers;
 
 import io.github.zeculesu.itmo.prog5.GUI.UDPGui;
+
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Cruds;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Main;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.MapMarines;
@@ -132,6 +133,7 @@ public class TableController extends BaseController {
             currentStage.close();
         });
 
+
         workshopButton.setOnAction(e->{
             Cruds main = new Cruds();
             Stage currentStage = (Stage) workshopButton.getScene().getWindow();
@@ -143,7 +145,6 @@ public class TableController extends BaseController {
             currentStage.close();
         });
 
-
     }
 
     private ObservableList<SpaceMarine> getData() {
@@ -154,6 +155,7 @@ public class TableController extends BaseController {
             request.setCommand("show");
             request.setLogin(this.getLogin());
             request.setPassword(this.getPassword());
+
             Response response = udpGui.sendRequest(request);
             data.addAll(response.getOutputElement());
 
@@ -164,4 +166,8 @@ public class TableController extends BaseController {
         }
         return data;
     }
+
 }
+
+}
+
