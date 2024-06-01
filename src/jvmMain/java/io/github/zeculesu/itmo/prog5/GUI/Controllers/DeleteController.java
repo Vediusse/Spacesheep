@@ -176,18 +176,25 @@ public class DeleteController extends BaseController {
 
 
     public void deleteLast(ActionEvent actionEvent) {
-        try {
-            udpGui.createSocket();
-            Request request = new Request();
-            request.setCommand("remove_lower");
-            request.setLogin(this.getLogin());
-            request.setPassword(this.getPassword());
-            Response response = udpGui.sendRequest(request);
-            tableView.setItems(getData());
-        }catch (SocketException | UnknownHostException e) {
-            throw new RuntimeException(e);
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        SpaceMarine selectedItem = tableView.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            try {
+                int id = selectedItem.getId();
+                udpGui.createSocket();
+                Request request = new Request();
+                request.setCommand("remove_lower");
+                request.setElem(selectedItem);
+                request.setLogin(this.getLogin());
+                request.setPassword(this.getPassword());
+                Response response = udpGui.sendRequest(request);
+                tableView.setItems(getData());
+            } catch (SocketException | UnknownHostException e) {
+                throw new RuntimeException(e);
+            } catch (IOException | ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            System.out.println("Ничего не выбрано.");
         }
 
     }
@@ -200,7 +207,7 @@ public class DeleteController extends BaseController {
             request.setLogin(this.getLogin());
             request.setPassword(this.getPassword());
             Response response = udpGui.sendRequest(request);
-            System.out.println(request.getPassword());
+            System.out.println(response.getError());
             tableView.setItems(getData());
         }catch (SocketException | UnknownHostException e) {
             throw new RuntimeException(e);

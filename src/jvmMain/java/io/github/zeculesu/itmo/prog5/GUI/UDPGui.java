@@ -46,15 +46,13 @@ public class UDPGui {
         Request request = new Request();
         request.setCommand("getlogincoords");
         request.setLogin(login);
-        request.setLogin(password);
+        request.setPassword(password);
         byte[] sendData = castToByte(request);
 
         sendPacket(sendData);
         Response response = (Response) getResponse();
-        System.out.println(response.getError());
         // Закрываем сокет
         clientSocket.close();
-
         return response;
     }
 
