@@ -54,18 +54,9 @@ public class CoordinatePlaneController extends BaseController {
 
     public void initialize() {
         try {
-            System.out.println(this.getPassword());
             this.loginCoord = udpGui.sendMeLoginCoords(this.getLogin(),this.getPassword()).getLoginCoord();
         } catch (Exception e) {
             this.loginCoord = new HashMap<>();
-            ArrayList<Coordinates> coordList = new ArrayList<>();
-            coordList.add(new Coordinates(1L, 3));
-            coordList.add(new Coordinates(5L, 9));
-            ArrayList<Coordinates> coordList2 = new ArrayList<>();
-            coordList2.add(new Coordinates(-5L, -3));
-            coordList2.add(new Coordinates(10L, 0));
-            loginCoord.put("loh", coordList);
-            loginCoord.put("log", coordList2);
         }
         redrawCoordinatePlane(); // Перерисовываем координатную плоскость и точки при инициализации
 

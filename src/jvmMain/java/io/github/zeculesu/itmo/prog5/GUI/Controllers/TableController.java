@@ -1,10 +1,12 @@
 package io.github.zeculesu.itmo.prog5.GUI.Controllers;
 
 import io.github.zeculesu.itmo.prog5.GUI.UDPGui;
-
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Cruds;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Main;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.MapMarines;
+import io.github.zeculesu.itmo.prog5.models.SpaceMarine;
+import io.github.zeculesu.itmo.prog5.models.Request;
+import io.github.zeculesu.itmo.prog5.models.Response;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,9 +16,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.scene.control.cell.PropertyValueFactory;
-import io.github.zeculesu.itmo.prog5.models.SpaceMarine;
-import io.github.zeculesu.itmo.prog5.models.Request;
-import io.github.zeculesu.itmo.prog5.models.Response;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,6 +23,8 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class TableController extends BaseController {
 
@@ -78,10 +79,14 @@ public class TableController extends BaseController {
     @FXML
     private Button settingsButton;
 
-
+    private ResourceBundle resourceBundle;
 
     @FXML
     public void initialize() {
+        // Load the resource bundle for localization
+        Locale locale = new Locale("ru"); // You can change this to dynamically load based on user selection
+        resourceBundle = ResourceBundle.getBundle("messages", locale);
+
         // Initialize the table columns
         tableView.prefHeightProperty().bind(content.heightProperty().multiply(0.75));
 
@@ -109,7 +114,22 @@ public class TableController extends BaseController {
         ObservableList<SpaceMarine> data = getData();
         tableView.setItems(data);
 
-
+        // Set localized text
+        wallButton.setText(resourceBundle.getString("wallButton"));
+        catalogButton.setText(resourceBundle.getString("catalogButton"));
+        tableButton.setText(resourceBundle.getString("tableButton"));
+        workshopButton.setText(resourceBundle.getString("workshopButton"));
+        settingsButton.setText(resourceBundle.getString("settingsButton"));
+        nameColumn.setText(resourceBundle.getString("nameColumn"));
+        coordinatesColumn.setText(resourceBundle.getString("coordinatesColumn"));
+        creationDateColumn.setText(resourceBundle.getString("creationDateColumn"));
+        healthColumn.setText(resourceBundle.getString("healthColumn"));
+        categoryColumn.setText(resourceBundle.getString("categoryColumn"));
+        weaponTypeColumn.setText(resourceBundle.getString("weaponTypeColumn"));
+        meleeWeaponColumn.setText(resourceBundle.getString("meleeWeaponColumn"));
+        chapterNameColumn.setText(resourceBundle.getString("chapterNameColumn"));
+        chapterLegionColumn.setText(resourceBundle.getString("chapterLegionColumn"));
+        ownerColumn.setText(resourceBundle.getString("ownerColumn"));
 
         wallButton.setOnAction(e -> {
             Main main = new Main();
@@ -132,7 +152,6 @@ public class TableController extends BaseController {
             }
             currentStage.close();
         });
-
 
         workshopButton.setOnAction(e->{
             Cruds main = new Cruds();
@@ -166,6 +185,4 @@ public class TableController extends BaseController {
         }
         return data;
     }
-
 }
-

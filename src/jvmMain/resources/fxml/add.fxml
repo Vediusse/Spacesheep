@@ -32,15 +32,15 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10">
                 <TextField promptText="Категория" fx:id="categoryField" prefWidth="300"/>
-                <Label text="Категории: Scout, Suppressor, Librarian, Helix" />
+                <Label text="Введите категорию (SCOUT, SUPPRESSOR, LIBRARIAN, HELIX)" />
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10">
                 <TextField promptText="Тип оружия" fx:id="weaponTypeField" prefWidth="300"/>
-                <Label text="Оружие: Boltgun, Heavy Boltgun, BOLT RIFLE, FLamer" />
+                <Label text="Введите тип оружия (BOLTGUN, HEAVY_BOLTGUN, BOLT_RIFLE, FLAMER, MULTI_MELTA)" />
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10">
                 <TextField promptText="Тип оружия ближнего боя" fx:id="meleeWeaponField" prefWidth="300"/>
-                <Label text="Бл. Оружие: Chain sword, Power sword, Chain Axe" />
+                <Label text="Введите оружие ближнего боя (CHAIN_SWORD, POWER_SWORD, CHAIN_AXE, MANREAPER, POWER_BLADE)" />
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10">
                 <TextField promptText="Глава" fx:id="chapterField" prefWidth="300"/>
