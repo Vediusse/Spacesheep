@@ -41,7 +41,7 @@ public class LogInController extends BaseController {
     @FXML
     public void initialize() {
         // Установка локали по умолчанию (русский)
-        Locale.setDefault(new Locale("mk", "MK"));
+        Locale.setDefault(new Locale("ru", "RU"));
         setLocale(Locale.getDefault());
         errorLabel.setVisible(false);
 

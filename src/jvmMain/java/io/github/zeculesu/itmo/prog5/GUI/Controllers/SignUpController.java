@@ -38,7 +38,7 @@ public class SignUpController extends BaseController {
     private ResourceBundle bundle;
     @FXML
     public void initialize() {
-        Locale.setDefault(new Locale("mk", "MK"));
+        Locale.setDefault(new Locale("ru", "RU"));
         setLocale(Locale.getDefault());
         errorLabel.setVisible(false);
 

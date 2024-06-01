@@ -54,7 +54,7 @@ public class CoordinatePlaneController extends BaseController {
 
     public void initialize() {
         try {
-            this.loginCoord = udpGui.sendMeLoginCoords(this.getLogin(),this.getPassword()).getLoginCoord();
+            this.loginCoord = udpGui.sendMeLoginCoords(this.getLogin(), this.getPassword()).getLoginCoord();
         } catch (Exception e) {
             this.loginCoord = new HashMap<>();
             ArrayList<Coordinates> coordList = new ArrayList<>();
@@ -133,6 +133,7 @@ public class CoordinatePlaneController extends BaseController {
 
             }
         }
+    }
 
 
     private void onPointClicked(MouseEvent event) {
