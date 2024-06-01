@@ -1,8 +1,5 @@
-import io.github.zeculesu.itmo.prog5.GUI.Windows.SignUp
 import io.github.zeculesu.itmo.prog5.GUI.UDPGui
-import io.github.zeculesu.itmo.prog5.GUI.Windows.LogIn
-import io.github.zeculesu.itmo.prog5.GUI.Windows.Main
-import io.github.zeculesu.itmo.prog5.GUI.Windows.MapMarines
+import io.github.zeculesu.itmo.prog5.GUI.Windows.*
 import javafx.application.Application
 
 fun main(argv: Array<String>) {

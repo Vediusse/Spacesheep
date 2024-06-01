@@ -100,7 +100,7 @@ public class LogInController extends BaseController {
         updateTexts();
     }
 
-    private void updateTexts() {
+    public void updateTexts() {
         loginTitle.setText(bundle.getString("loginTitle"));
         userTextField.setPromptText(bundle.getString("login"));
         pwBox.setPromptText(bundle.getString("pwBoxPrompt"));

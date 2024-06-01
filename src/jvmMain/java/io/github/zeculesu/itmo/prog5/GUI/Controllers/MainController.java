@@ -150,6 +150,23 @@ public class MainController extends BaseController {
         if(mainHeader!=null){
             this.mainHeader.setText("Приветствую, " + this.getLogin());
         }
+        settingsButton.setOnAction(e ->{
+            Settings main = new Settings();
+            Stage currentStage = (Stage) workshopButton.getScene().getWindow();
+            try {
+                main.start(new Stage());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+            currentStage.close();
+                }
+        );
+        this.bundle = ResourceManager.getInstance().getResourceBundle();
+        this.updateTexts();
+        ResourceManager.getInstance().localeProperty().addListener((observable, oldValue, newValue) -> {
+            updateTexts();
+        });
+
     }
 
     public void setLocale(Locale locale) {
@@ -157,7 +174,7 @@ public class MainController extends BaseController {
         updateTexts();
     }
 
-    private void updateTexts() {
+    public void updateTexts() {
         sidebarTitle.setText(bundle.getString("sidebarTitle"));
         wallButton.setText(bundle.getString("wallButton"));
         catalogButton.setText(bundle.getString("catalogButton"));

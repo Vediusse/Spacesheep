@@ -166,7 +166,9 @@ public class Server {
                             }
                             return null;
                         }, executorService)
-                        .thenApplyAsync(requestData -> RequestExecute.requestExecute(this.environment, clientCollections, requestData), executorService)
+                        .thenApplyAsync(requestData -> {
+                            return RequestExecute.requestExecute(this.environment, clientCollections, requestData);
+                        }, executorService)
                         .thenAcceptAsync(response -> {
                             Runnable sendingTesk = () -> {
                                 try {

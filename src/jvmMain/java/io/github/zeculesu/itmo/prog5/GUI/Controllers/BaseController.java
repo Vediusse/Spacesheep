@@ -54,6 +54,6 @@ public abstract class BaseController {
         bundle = ResourceBundle.getBundle("messages", locale);
         updateTexts();
     }
-    private void updateTexts() {}
+    void updateTexts() {}
 }
 

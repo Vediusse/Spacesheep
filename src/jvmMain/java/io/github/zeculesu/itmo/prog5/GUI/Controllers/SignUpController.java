@@ -97,7 +97,7 @@ public class SignUpController extends BaseController {
         updateTexts();
     }
 
-    private void updateTexts() {
+    public void updateTexts() {
         registerTitle.setText(bundle.getString("registerTitle"));
         userTextField.setPromptText(bundle.getString("login"));
         pwBox.setPromptText(bundle.getString("pwBoxPrompt"));

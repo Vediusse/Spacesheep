@@ -22,4 +22,11 @@ public class Chapter implements Serializable {
         return parentLegion;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setParentLegion(String parentLegion) {
+        this.parentLegion = parentLegion;
+    }
 }

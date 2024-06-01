@@ -91,6 +91,12 @@ public class AddController extends BaseController {
     public void initialize() {
         setLocale(Locale.getDefault());
         errorLabel.setVisible(false);
+
+        this.bundle = ResourceManager.getInstance().getResourceBundle();
+        this.updateTexts();
+        ResourceManager.getInstance().localeProperty().addListener((observable, oldValue, newValue) -> {
+            updateTexts();
+        });
     }
 
     @FXML
