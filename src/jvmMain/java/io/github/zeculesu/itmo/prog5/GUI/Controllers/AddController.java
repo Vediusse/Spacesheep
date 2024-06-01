@@ -89,7 +89,6 @@ public class AddController extends BaseController {
 
     @FXML
     public void initialize() {
-        Locale.setDefault(new Locale("ru", "RU"));
         setLocale(Locale.getDefault());
         errorLabel.setVisible(false);
     }
