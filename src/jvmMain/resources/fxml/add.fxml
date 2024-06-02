@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -18,35 +19,36 @@
                 <Label fx:id="nameErrorLabel"/>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <TextField fx:id="coordinatesXField" prefWidth="300"/>
+                <TextField fx:id="coordinatesXField" prefWidth="300" styleClass="text-field"/>
                 <Label fx:id="coordinatesXErrorLabel"/>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <TextField fx:id="coordinatesYField" prefWidth="300"/>
+                <TextField fx:id="coordinatesYField" prefWidth="300" styleClass="text-field"/>
                 <Label fx:id="coordinatesYErrorLabel"/>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <TextField fx:id="healthField" prefWidth="300"/>
+                <TextField fx:id="healthField" prefWidth="300" styleClass="text-field"/>
                 <Label fx:id="healthErrorLabel"/>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <TextField fx:id="categoryField" prefWidth="300"/>
+                <ComboBox fx:id="categoryField" prefWidth="300" styleClass="text-field-check"/>
                 <Label fx:id="categoryErrorLabel"/>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <TextField fx:id="weaponTypeField" prefWidth="300"/>
+                <ComboBox fx:id="weaponTypeField" prefWidth="300" styleClass="text-field-check"/>
                 <Label fx:id="weaponTypeErrorLabel"/>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <TextField fx:id="meleeWeaponField" prefWidth="300"/>
+                <ComboBox fx:id="meleeWeaponField" prefWidth="300" styleClass="text-field-check"/>
                 <Label fx:id="meleeWeaponErrorLabel"/>
             </HBox>
+
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <TextField fx:id="chapterField" prefWidth="300"/>
+                <TextField fx:id="chapterField" prefWidth="300" styleClass="text-field"/>
                 <Label fx:id="chapterErrorLabel"/>
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <TextField fx:id="chapterLField" prefWidth="300"/>
+                <TextField fx:id="chapterLField" prefWidth="300" styleClass="text-field"/>
                 <Label fx:id="chapterLErrorLabel"/>
             </HBox>
         </VBox>

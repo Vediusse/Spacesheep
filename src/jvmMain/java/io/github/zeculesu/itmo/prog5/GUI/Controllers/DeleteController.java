@@ -63,27 +63,12 @@ public class DeleteController extends BaseController {
     @FXML
     private TableColumn<SpaceMarine, String> ownerColumn;
 
-    @FXML
-    private Button wallButton;
-
-    @FXML
-    private Button catalogButton;
-
-    @FXML
-    private Button tableButton;
-
-    @FXML
-    private Button workshopButton;
-
-    @FXML
-    private Button settingsButton;
 
 
 
     @FXML
     public void initialize() {
         // Initialize the table columns
-        tableView.prefHeightProperty().bind(content.heightProperty().multiply(0.75));
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         coordinatesColumn.setCellValueFactory(cellData -> {
@@ -108,49 +93,6 @@ public class DeleteController extends BaseController {
         // Load data into the table
         ObservableList<SpaceMarine> data = getData();
         tableView.setItems(data);
-
-
-
-        tableButton.setOnAction(e -> {
-            Table Table = new Table();
-            Stage currentStage = (Stage) tableButton.getScene().getWindow();
-            try {
-                Table.start(new Stage());
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-            currentStage.close();
-        });
-        catalogButton.setOnAction(e -> {
-            MapMarines Table = new MapMarines();
-            Stage currentStage = (Stage) tableButton.getScene().getWindow();
-            try {
-                Table.start(new Stage());
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-            currentStage.close();
-        });
-        wallButton.setOnAction(e ->{
-            Main main = new Main();
-            Stage currentStage = (Stage) wallButton.getScene().getWindow();
-            try {
-                main.start(new Stage());
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-            currentStage.close();
-        });
-        workshopButton.setOnAction(e->{
-            Cruds main = new Cruds();
-            Stage currentStage = (Stage) workshopButton.getScene().getWindow();
-            try {
-                main.start(new Stage());
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-            currentStage.close();
-        });
 
 
     }
@@ -207,7 +149,6 @@ public class DeleteController extends BaseController {
             request.setLogin(this.getLogin());
             request.setPassword(this.getPassword());
             Response response = udpGui.sendRequest(request);
-            System.out.println(response.getError());
             tableView.setItems(getData());
         }catch (SocketException | UnknownHostException e) {
             throw new RuntimeException(e);

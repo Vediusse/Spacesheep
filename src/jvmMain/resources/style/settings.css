@@ -17,20 +17,6 @@
     -fx-padding: 10 0;
 }
 
-
-.header {
-    -fx-background-color: rgba(21,21,21,1);
-    -fx-padding: 10 30 10 0;
-    -fx-alignment: center-right;
-    -fx-border-color: transparent transparent #403F3F transparent;
-    -fx-border-width: 0 0 3px 0;
-}
-.image-view{
-    -fx-min-height: 100;
-    -fx-spacing: 20;
-
-}
-
 .sidebar-buttons, .sidebar-bands {
     -fx-spacing: 10;
 }
@@ -267,31 +253,18 @@ ScrollPane {
 }
 
 
-.cruds-buttons{
-    -fx-background-color: #333;
-    -fx-border-color: #555;
-    -fx-padding: 20;
-    -fx-background-radius: 10;
-    -fx-border-radius: 10;
+.header {
+    -fx-background-color: rgba(21,21,21,1);
+    -fx-padding: 10 30 10 0;
+    -fx-alignment: center-right;
+    -fx-border-color: transparent transparent #403F3F transparent;
+    -fx-border-width: 0 0 3px 0;
 }
+.image-view{
+    -fx-min-height: 100;
+    -fx-spacing: 20;
 
-.create-button {
-    -fx-font-size: 48px;
-    -fx-text-fill: #777;
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
 }
-
-.create-ship-text {
-    -fx-fill: #777;
-    -fx-font-size: 18px;
-}
-
-.main-header {
-    -fx-font-size: 24px;
-    -fx-text-fill: #fff;
-}
-
 
 .language-button {
     -fx-background-color: transparent;

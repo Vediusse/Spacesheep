@@ -1,12 +1,12 @@
 package io.github.zeculesu.itmo.prog5.GUI.Controllers;
 
+import io.github.zeculesu.itmo.prog5.GUI.Windows.Cruds;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Table;
-import javafx.scene.control.Button;
 import io.github.zeculesu.itmo.prog5.models.*;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -65,13 +65,13 @@ public class AddController extends BaseController {
     private TextField healthField;
 
     @FXML
-    private TextField categoryField;
+    private ComboBox<String> categoryField;
 
     @FXML
-    private TextField weaponTypeField;
+    private ComboBox<String> weaponTypeField;
 
     @FXML
-    private TextField meleeWeaponField;
+    private ComboBox<String> meleeWeaponField;
 
     @FXML
     private TextField chapterField;
@@ -85,8 +85,6 @@ public class AddController extends BaseController {
     @FXML
     private Button cancelButton;
 
-    private List<TextField> textFields = new ArrayList<>();
-
     @FXML
     public void initialize() {
         setLocale(Locale.getDefault());
@@ -97,6 +95,11 @@ public class AddController extends BaseController {
         ResourceManager.getInstance().localeProperty().addListener((observable, oldValue, newValue) -> {
             updateTexts();
         });
+
+        // Populate the ComboBoxes
+        categoryField.setItems(FXCollections.observableArrayList("SCOUT", "SUPPRESSOR", "LIBRARIAN", "HELIX"));
+        weaponTypeField.setItems(FXCollections.observableArrayList("BOLTGUN", "HEAVY_BOLTGUN", "BOLT_RIFLE", "FLAMER", "MULTI_MELTA"));
+        meleeWeaponField.setItems(FXCollections.observableArrayList("CHAIN_SWORD", "POWER_SWORD", "CHAIN_AXE", "MANREAPER", "POWER_BLADE"));
     }
 
     @FXML
@@ -106,9 +109,9 @@ public class AddController extends BaseController {
             Long x = Long.parseLong(coordinatesXField.getText());
             int y = Integer.parseInt(coordinatesYField.getText());
             int health = Integer.parseInt(healthField.getText());
-            AstartesCategory category = AstartesCategory.valueOf(categoryField.getText().toUpperCase());
-            Weapon weaponType = Weapon.valueOf(weaponTypeField.getText().toUpperCase());
-            MeleeWeapon meleeWeapon = MeleeWeapon.valueOf(meleeWeaponField.getText().toUpperCase());
+            AstartesCategory category = AstartesCategory.valueOf(categoryField.getValue().toUpperCase());
+            Weapon weaponType = Weapon.valueOf(weaponTypeField.getValue().toUpperCase());
+            MeleeWeapon meleeWeapon = MeleeWeapon.valueOf(meleeWeaponField.getValue().toUpperCase());
             String chapterName = chapterField.getText();
 
             if (name.isEmpty() || chapterName.isEmpty()) {
@@ -117,18 +120,26 @@ public class AddController extends BaseController {
             }
 
             Coordinates coordinates = new Coordinates(x, y);
-            Chapter chapter = new Chapter(chapterName, chapterLField.getText());  // Assuming Chapter has a constructor taking a name and parentLegion
+            Chapter chapter = new Chapter(chapterName, chapterLField.getText());
             SpaceMarine spaceMarine = new SpaceMarine(0, name, coordinates, health, category, weaponType, meleeWeapon, chapter);
 
-            // Здесь отправка объекта spaceMarine на сервер
             Request request = new Request();
             request.setCommand("add");
             request.setLogin(this.getLogin());
             request.setPassword(this.getPassword());
             request.setElem(spaceMarine);
 
-            // Ваш метод для отправки запроса
             udpGui.sendRequest(request);
+
+
+            Table table = new Table();
+            Stage currentStage = (Stage) nameField.getScene().getWindow();
+            try {
+                table.start(new Stage());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
+            currentStage.close();
 
         } catch (IllegalArgumentException | SocketException | UnknownHostException e) {
             showError("Ошибка");
@@ -147,20 +158,21 @@ public class AddController extends BaseController {
 
     @FXML
     public void back(ActionEvent event) {
-        // Логика для обработки действия "Отменить", например, закрытие окна или очистка формы
-        Table Table = new Table();
+        Cruds cruds = new Cruds();
         Stage currentStage = (Stage) nameField.getScene().getWindow();
         try {
-            Table.start(new Stage());
+            cruds.start(new Stage());
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
         currentStage.close();
     }
+
     public void setLocale(Locale locale) {
         bundle = ResourceBundle.getBundle("messages", locale);
         updateTexts();
     }
+
     public void updateTexts(){
         titleLabel.setText(bundle.getString("createNewShip"));
         nameField.setPromptText(bundle.getString("namePrompt"));

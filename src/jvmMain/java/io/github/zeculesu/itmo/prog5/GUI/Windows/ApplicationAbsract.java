@@ -6,7 +6,6 @@ import javafx.application.Application;
 import java.util.Locale;
 
 public abstract class ApplicationAbsract extends Application {
-    UDPGui udpGui = new UDPGui("localhost",45003);
 
 }
 

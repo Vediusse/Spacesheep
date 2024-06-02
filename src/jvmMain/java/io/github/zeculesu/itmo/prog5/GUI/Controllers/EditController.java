@@ -3,6 +3,7 @@ package io.github.zeculesu.itmo.prog5.GUI.Controllers;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Cruds;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Main;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.MapMarines;
+import io.github.zeculesu.itmo.prog5.GUI.Windows.Settings;
 import io.github.zeculesu.itmo.prog5.models.Request;
 import io.github.zeculesu.itmo.prog5.models.Response;
 import io.github.zeculesu.itmo.prog5.models.SpaceMarine;
@@ -65,25 +66,9 @@ public class EditController extends BaseController {
     private TableColumn<SpaceMarine, String> ownerColumn;
 
     @FXML
-    private Button wallButton;
-
-    @FXML
-    private Button catalogButton;
-
-    @FXML
-    private Button tableButton;
-
-    @FXML
-    private Button workshopButton;
-
-    @FXML
-    private Button settingsButton;
-
-    @FXML
     public void initialize() {
         // Initialize the table columns
         tableView.setEditable(true);
-        tableView.prefHeightProperty().bind(content.heightProperty().multiply(0.75));
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         nameColumn.setCellFactory(TextFieldTableCell.forTableColumn(new DefaultStringConverter()));
@@ -151,38 +136,6 @@ public class EditController extends BaseController {
         ObservableList<SpaceMarine> data = getData();
         tableView.setItems(data);
 
-        wallButton.setOnAction(e -> {
-            Main main = new Main();
-            Stage currentStage = (Stage) wallButton.getScene().getWindow();
-            try {
-                main.start(new Stage());
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-            currentStage.close();
-        });
-
-        catalogButton.setOnAction(e -> {
-            MapMarines table = new MapMarines();
-            Stage currentStage = (Stage) tableButton.getScene().getWindow();
-            try {
-                table.start(new Stage());
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-            currentStage.close();
-        });
-
-        workshopButton.setOnAction(e -> {
-            Cruds main = new Cruds();
-            Stage currentStage = (Stage) workshopButton.getScene().getWindow();
-            try {
-                main.start(new Stage());
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-            currentStage.close();
-        });
 
     }
 

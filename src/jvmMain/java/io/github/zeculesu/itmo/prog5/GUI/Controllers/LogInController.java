@@ -65,7 +65,7 @@ public class LogInController extends BaseController {
                 Response response;
                 try {
                     sendData = UDPGui.castToByte(request);
-                    udpGui.sendPacket(sendData);
+                    this.udpGui.sendPacket(sendData);
                     response = udpGui.getResponse();
                 }
 
