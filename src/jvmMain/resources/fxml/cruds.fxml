@@ -18,18 +18,32 @@
     <HBox styleClass="create-ship-container"
           AnchorPane.topAnchor="80.0" AnchorPane.leftAnchor="10.0"
           spacing="20"> <!-- Здесь задано расстояние между элементами внутри HBox -->
-        <VBox alignment="CENTER" spacing="10" styleClass="cruds-buttons">
-            <Button fx:id="createButton" text="+" onAction="#handleCreate" styleClass="create-button"/>
-            <Text text="Создать новый корабль" styleClass="create-ship-text"/>
-        </VBox>
-        <VBox alignment="CENTER" spacing="10" styleClass="cruds-buttons">
-            <Button fx:id="deleteButton" text="-" onAction="#handleDelete" styleClass="create-button"/>
-            <Text text="Удаление кораблей" styleClass="create-ship-text"/>
-        </VBox>
-        <VBox alignment="CENTER" spacing="10" styleClass="cruds-buttons">
-            <Button fx:id="findButton" text="?" onAction="#handleFind" styleClass="create-button"/>
-            <Text text="Изменить корабль" styleClass="create-ship-text"/>
-        </VBox>
+        <Button onAction="#handleCreate" styleClass="cruds-buttons">
+            <graphic>
+                <VBox alignment="CENTER" spacing="10">
+                    <Text text="+" styleClass="create-ship-text-big"/>
+                    <Text text="Создать новый корабль" styleClass="create-ship-text"/>
+                </VBox>
+            </graphic>
+
+        </Button>
+        <Button onAction="#handleDelete" styleClass="cruds-buttons">
+            <graphic>
+                <VBox alignment="CENTER" spacing="10">
+                    <Text text="-" styleClass="create-ship-text-big"/>
+                    <Text text="Удаление кораблей" styleClass="create-ship-text"/>
+                </VBox>
+            </graphic>
+
+        </Button>
+        <Button onAction="#handleFind" styleClass="cruds-buttons">
+            <graphic>
+                <VBox alignment="CENTER" spacing="10">
+                    <Text text="?" styleClass="create-ship-text-big" style="-fx-text-fill: #777"/>
+                    <Text text="Изменить корабль" styleClass="create-ship-text"/>
+                </VBox>
+            </graphic>
+        </Button>
     </HBox>
 
 

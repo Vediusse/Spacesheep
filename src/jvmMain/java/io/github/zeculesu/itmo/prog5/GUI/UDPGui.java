@@ -61,7 +61,6 @@ public class UDPGui {
         this.clientSocket = new DatagramSocket();
         // Получаем IP адрес сервера
         this.serverIPAddress = InetAddress.getByName(this.host);
-        this.clientSocket.setSoTimeout(1500);
     }
 
     public void sendPacket(byte[] sendData) throws IOException {

@@ -218,3 +218,20 @@ Label{
     -fx-text-fill: white;
 }
 
+
+.language-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.language-button .image-view {
+    -fx-image-width: 30px;  /* Установите нужный размер флага */
+    -fx-image-height: 20px; /* Установите нужный размер флага */
+}
+
+.language-button.active-language {
+    -fx-border-color: gold;
+    -fx-border-width: 3px;
+    -fx-border-radius: 5px;
+}
+
