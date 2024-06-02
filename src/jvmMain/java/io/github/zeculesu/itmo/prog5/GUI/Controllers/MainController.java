@@ -1,16 +1,20 @@
 package io.github.zeculesu.itmo.prog5.GUI.Controllers;
 
 import io.github.zeculesu.itmo.prog5.GUI.Controllers.BaseController;
+import io.github.zeculesu.itmo.prog5.GUI.NotificationManager;
 import io.github.zeculesu.itmo.prog5.GUI.UDPGui;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.*;
 import io.github.zeculesu.itmo.prog5.models.Request;
 import io.github.zeculesu.itmo.prog5.models.Response;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -26,7 +30,7 @@ public class MainController extends BaseController {
 
     public VBox sidebarButtons;
     @FXML
-    private HBox root; // Привязываем корневой элемент HBox
+    private StackPane root; // Привязываем корневой элемент HBox
 
     // Sidebar
     @FXML
@@ -106,9 +110,16 @@ public class MainController extends BaseController {
 
     private ResourceBundle bundle;
 
+    @FXML
+    private VBox notificationsContainer;
+
 
     @FXML
     public void initialize() {
+        StackPane.setAlignment(notificationsContainer, Pos.TOP_RIGHT);
+        notificationsContainer.setPadding(new Insets(10)); // padding to move it away from the edge
+
+        NotificationManager.getInstance().setNotificationsContainer(notificationsContainer);
         tableButton.setOnAction(e -> {
             Table Table = new Table();
             Stage currentStage = (Stage) tableButton.getScene().getWindow();

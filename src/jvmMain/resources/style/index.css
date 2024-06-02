@@ -276,3 +276,35 @@ ScrollPane {
 }
 
 
+.notification {
+    -fx-padding: 10px;
+    -fx-border-width: 1px;
+    -fx-border-color: black;
+    -fx-background-color: lightgrey;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+.notification-success {
+    -fx-background-color: lightgreen;
+}
+
+.notification-error {
+    -fx-background-color: lightcoral;
+}
+
+.scroll-pane{
+    -fx-background-color: rgba(21,21,21,0.95);
+}
+.content-padding{
+    -fx-background-color: rgba(21,21,21,0.95);
+}
+
+.tableView{
+    -fx-background-color: rgba(21,21,21,0.95);
+}
+
+
+
+

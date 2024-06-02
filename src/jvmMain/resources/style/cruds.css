@@ -17,20 +17,6 @@
     -fx-padding: 10 0;
 }
 
-
-.header {
-    -fx-background-color: rgba(21,21,21,1);
-    -fx-padding: 10 30 10 0;
-    -fx-alignment: center-right;
-    -fx-border-color: transparent transparent #403F3F transparent;
-    -fx-border-width: 0 0 3px 0;
-}
-.image-view{
-    -fx-min-height: 100;
-    -fx-spacing: 20;
-
-}
-
 .sidebar-buttons, .sidebar-bands {
     -fx-spacing: 10;
 }
@@ -273,6 +259,9 @@ ScrollPane {
     -fx-padding: 20;
     -fx-background-radius: 10;
     -fx-border-radius: 10;
+    -fx-min-width: 200px;
+    -fx-min-height: 150px;
+    -fx-cursor: hand;
 }
 
 .create-button {
@@ -285,6 +274,10 @@ ScrollPane {
 .create-ship-text {
     -fx-fill: #777;
     -fx-font-size: 18px;
+}
+.create-ship-text-big{
+    -fx-fill: #777;
+    -fx-font-size: 60px;
 }
 
 .main-header {
@@ -308,3 +301,5 @@ ScrollPane {
     -fx-border-width: 3px;
     -fx-border-radius: 5px;
 }
+
+

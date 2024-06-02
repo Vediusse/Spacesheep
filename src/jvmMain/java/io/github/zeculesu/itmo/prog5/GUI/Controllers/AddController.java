@@ -1,21 +1,21 @@
 package io.github.zeculesu.itmo.prog5.GUI.Controllers;
 
+import io.github.zeculesu.itmo.prog5.GUI.NotificationManager;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Cruds;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Table;
 import io.github.zeculesu.itmo.prog5.models.*;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletableFuture;
 
 public class AddController extends BaseController {
 
@@ -129,25 +129,38 @@ public class AddController extends BaseController {
             request.setPassword(this.getPassword());
             request.setElem(spaceMarine);
 
-            udpGui.sendRequest(request);
+            sendRequestAsync(request).thenAccept(response -> {
+                Platform.runLater(() -> {
+                    Table table = new Table();
+                    Stage currentStage = (Stage) nameField.getScene().getWindow();
+                    try {
+                        table.start(new Stage());
+                        NotificationManager.getInstance().showNotification("Задача выполнена успешно.", "success");
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    currentStage.close();
+                });
+            }).exceptionally(e -> {
+                Platform.runLater(() -> showError("Ошибка выполнения задачи."));
+                e.printStackTrace();
+                return null;
+            });
 
-
-            Table table = new Table();
-            Stage currentStage = (Stage) nameField.getScene().getWindow();
-            try {
-                table.start(new Stage());
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-            currentStage.close();
-
-        } catch (IllegalArgumentException | SocketException | UnknownHostException e) {
-            showError("Ошибка");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (IllegalArgumentException e) {
+            showError("Неправильный формат данных.");
         }
+    }
+
+    private CompletableFuture<Response> sendRequestAsync(Request request) {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                udpGui.createSocket();
+                return udpGui.sendRequest(request);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     @FXML
