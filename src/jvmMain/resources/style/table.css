@@ -33,7 +33,7 @@
 
 .main-content {
     -fx-pref-width: 100%;
-    -fx-background-color: transparent;
+    -fx-background-color: rgba(21,21,21,0.95)
 }
 
 .content-padding {
@@ -52,6 +52,12 @@
     -fx-alignment: center-right;
     -fx-border-color: transparent transparent #403F3F transparent;
     -fx-border-width: 0 0 3px 0;
+    -fx-min-height: 80;
+}
+.image-view{
+    -fx-min-height: 100;
+    -fx-spacing: 40;
+
 }
 
 .header-search {
@@ -65,9 +71,10 @@
     -fx-text-fill: #787878;
     -fx-font-size: 30;
     -fx-alignment: center-left;
-    -fx-padding: 0 0 30 0;
+    -fx-padding: 0 0 20 0;
     -fx-translate-x: -20;
 }
+
 
 .content {
     -fx-padding: 20;
@@ -183,15 +190,32 @@
 
 
 .scroll-pane {
-    -fx-background-color: transparent;
     -fx-pref-width: 100%;
     -fx-border-radius: 20px;
 }
 
-ScrollPane {
+
+
+.scroll-pane .scroll-bar {
+    -fx-opacity: 1;
+}
+
+
+
+.scroll-bar:horizontal {
     -fx-background-color: transparent;
-    -fx-hbar-policy: never;
-    -fx-vbar-policy: always;
+
+}
+
+.scroll-pane, .scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+.thumb {
+    -fx-background-color: grey;
+    -fx-pref-width: 10px;
+    -fx-border-radius: 2px;
+
 }
 
 .scroll-pane .scroll-bar:vertical {
@@ -230,29 +254,6 @@ ScrollPane {
     -fx-padding: 0;
 }
 
-.scroll-pane .scroll-bar .thumb .increment-box,
-.scroll-pane .scroll-bar .thumb .decrement-box {
-    -fx-background-color: transparent;
-    -fx-shape: "";
-}
-
-.scroll-pane .scroll-bar:horizontal {
-    -fx-background-color: transparent;
-}
-
-.scroll-pane .scroll-bar:horizontal .track,
-.scroll-pane .scroll-bar:horizontal .thumb {
-    -fx-background-color: transparent;
-}
-
-.scroll-pane .scroll-bar:horizontal .increment-button,
-.scroll-pane .scroll-bar:horizontal .decrement-button,
-.scroll-pane .scroll-bar:horizontal .increment-arrow,
-.scroll-pane .scroll-bar:horizontal .decrement-arrow {
-    -fx-background-color: transparent;
-    -fx-shape: "";
-    -fx-padding: 0;
-}
 
 .main-section{
     -fx-text-fill: #787878;
@@ -263,18 +264,70 @@ ScrollPane {
 }
 
 
+.language-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.language-button .image-view {
+    -fx-image-width: 30px;  /* Установите нужный размер флага */
+    -fx-image-height: 20px; /* Установите нужный размер флага */
+}
+
+.language-button.active-language {
+    -fx-border-color: gold;
+    -fx-border-width: 3px;
+    -fx-border-radius: 5px;
+}
+
+.notification {
+    -fx-padding: 10px;
+    -fx-border-width: 1px;
+    -fx-border-color: black;
+    -fx-background-color: lightgrey;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+.notification-success {
+    -fx-background-color: lightgreen;
+}
+
+.notification-error {
+    -fx-background-color: lightcoral;
+}
 
 
 
+.content {
+    -fx-padding: 20;
+}
 
 
+.scroll-pane{
+    -fx-background-color: rgba(21,21,21,0.95);
+}
+.content-padding{
+    -fx-background-color: rgba(21,21,21,0.95);
+}
 
+.tableView{
+    -fx-background-color: rgba(21,21,21,0.95);
+}
 
+.language-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
 
+.language-button .image-view {
+    -fx-image-width: 30px;  /* Установите нужный размер флага */
+    -fx-image-height: 20px; /* Установите нужный размер флага */
+}
 
-
-
-
-
-
-
+.language-button.active-language {
+    -fx-border-color: gold;
+    -fx-border-width: 3px;
+    -fx-border-radius: 5px;
+}

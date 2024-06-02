@@ -1,15 +1,20 @@
 package io.github.zeculesu.itmo.prog5.GUI.Controllers;
 
 import io.github.zeculesu.itmo.prog5.GUI.Controllers.BaseController;
+import io.github.zeculesu.itmo.prog5.GUI.NotificationManager;
 import io.github.zeculesu.itmo.prog5.GUI.UDPGui;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.*;
 import io.github.zeculesu.itmo.prog5.models.Request;
 import io.github.zeculesu.itmo.prog5.models.Response;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -25,7 +30,7 @@ public class MainController extends BaseController {
 
     public VBox sidebarButtons;
     @FXML
-    private HBox root; // Привязываем корневой элемент HBox
+    private StackPane root; // Привязываем корневой элемент HBox
 
     // Sidebar
     @FXML
@@ -82,6 +87,9 @@ public class MainController extends BaseController {
     private Label mainHeader;
 
     @FXML
+    private HBox header; // Добавляем ссылку на контейнер с кнопками
+
+    @FXML
     private Label mainDescription;
 
     @FXML
@@ -98,15 +106,20 @@ public class MainController extends BaseController {
     private ImageView imageView;
 
     @FXML
-    private TextField userTextField;
-    @FXML
     private VBox content;
 
     private ResourceBundle bundle;
 
+    @FXML
+    private VBox notificationsContainer;
+
 
     @FXML
     public void initialize() {
+        StackPane.setAlignment(notificationsContainer, Pos.TOP_RIGHT);
+        notificationsContainer.setPadding(new Insets(10)); // padding to move it away from the edge
+
+        NotificationManager.getInstance().setNotificationsContainer(notificationsContainer);
         tableButton.setOnAction(e -> {
             Table Table = new Table();
             Stage currentStage = (Stage) tableButton.getScene().getWindow();
@@ -169,6 +182,34 @@ public class MainController extends BaseController {
 
     }
 
+
+    @FXML
+    public void changeLocale(ActionEvent actionEvent) {
+        String buttonId = ((Button) actionEvent.getSource()).getId();
+        Locale locale;
+        switch (buttonId) {
+            case "ru":
+                locale = new Locale("ru");
+                break;
+            case "es":
+                locale = new Locale("es", "CO");
+                break;
+            case "mk":
+                locale = new Locale("mk");
+                break;
+            case "lt":
+                locale = new Locale("lt");
+                break;
+            default:
+                locale = Locale.getDefault();
+                break;
+        }
+        ResourceManager.getInstance().setLocale(locale);
+        setLocale(locale);
+        updateTexts();
+        highlightActiveLanguage(buttonId);
+    }
+
     public void setLocale(Locale locale) {
         bundle = ResourceBundle.getBundle("messages", locale);
         updateTexts();
@@ -181,7 +222,6 @@ public class MainController extends BaseController {
         tableButton.setText(bundle.getString("tableButton"));
         workshopButton.setText(bundle.getString("workshopButton"));
         settingsButton.setText(bundle.getString("settingsButton"));
-        userTextField.setPromptText(bundle.getString("userTextFieldPrompt"));
 
         // Обновление динамически добавленного контента
         if (mainHeader != null) mainHeader.setText(bundle.getString("mainHeader"));
@@ -192,5 +232,18 @@ public class MainController extends BaseController {
         if (authorDescription2 != null) authorDescription2.setText(bundle.getString("authorDescription2"));
         if (footerHeader != null) footerHeader.setText(bundle.getString("footerHeader"));
         if (footerText != null) footerText.setText(bundle.getString("footerText"));
+    }
+
+    private void highlightActiveLanguage(String activeButtonId) {
+        for (var node : header.getChildren()) {
+            if (node instanceof Button) {
+                Button button = (Button) node;
+                if (button.getId().equals(activeButtonId)) {
+                    button.getStyleClass().add("active-language");
+                } else {
+                    button.getStyleClass().remove("active-language");
+                }
+            }
+        }
     }
 }

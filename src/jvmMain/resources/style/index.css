@@ -52,6 +52,12 @@
     -fx-alignment: center-right;
     -fx-border-color: transparent transparent #403F3F transparent;
     -fx-border-width: 0 0 3px 0;
+    -fx-min-height: 80;
+}
+.image-view{
+    -fx-min-height: 100;
+    -fx-spacing: 40;
+
 }
 
 .header-search {
@@ -251,4 +257,54 @@ ScrollPane {
     -fx-padding: 50 0 30 0;
     -fx-translate-x: -20;
 }
+
+
+.language-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+.language-button .image-view {
+    -fx-image-width: 30px;  /* Установите нужный размер флага */
+    -fx-image-height: 20px; /* Установите нужный размер флага */
+}
+
+.language-button.active-language {
+    -fx-border-color: gold;
+    -fx-border-width: 3px;
+    -fx-border-radius: 5px;
+}
+
+
+.notification {
+    -fx-padding: 10px;
+    -fx-border-width: 1px;
+    -fx-border-color: black;
+    -fx-background-color: lightgrey;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+.notification-success {
+    -fx-background-color: lightgreen;
+}
+
+.notification-error {
+    -fx-background-color: lightcoral;
+}
+
+.scroll-pane{
+    -fx-background-color: rgba(21,21,21,0.95);
+}
+.content-padding{
+    -fx-background-color: rgba(21,21,21,0.95);
+}
+
+.tableView{
+    -fx-background-color: rgba(21,21,21,0.95);
+}
+
+
+
 

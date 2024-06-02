@@ -5,6 +5,9 @@ import io.github.zeculesu.itmo.prog5.GUI.Windows.Main;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.MapMarines;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Table;
 import io.github.zeculesu.itmo.prog5.models.Coordinates;
+import io.github.zeculesu.itmo.prog5.models.Request;
+import io.github.zeculesu.itmo.prog5.models.Response;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -15,14 +18,13 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 public class CoordinatePlaneController extends BaseController {
 
     @FXML
     private Canvas coordinatePlane;
-
 
     @FXML
     private Button wallButton;
@@ -53,12 +55,25 @@ public class CoordinatePlaneController extends BaseController {
     private Map<String, ArrayList<Coordinates>> loginCoord; // Список точек для отображения
 
     public void initialize() {
-        try {
-            this.loginCoord = udpGui.sendMeLoginCoords(this.getLogin(),this.getPassword()).getLoginCoord();
-        } catch (Exception e) {
-            this.loginCoord = new HashMap<>();
-        }
-        redrawCoordinatePlane(); // Перерисовываем координатную плоскость и точки при инициализации
+        // Asynchronous request to get coordinates
+        Request request = new Request();
+        request.setCommand("getlogincoords");
+        request.setLogin(this.getLogin());
+        request.setPassword(this.getPassword());
+
+        sendRequestAsync(request).thenAccept(response -> {
+            Platform.runLater(() -> {
+                this.loginCoord = response.getLoginCoord();
+                redrawCoordinatePlane();
+            });
+        }).exceptionally(e -> {
+            Platform.runLater(() -> {
+                this.loginCoord = new HashMap<>();
+                redrawCoordinatePlane(); // Перерисовываем координатную плоскость и точки при инициализации
+            });
+            e.printStackTrace();
+            return null;
+        });
 
         // Добавляем обработчики событий мыши для перемещения карты
         coordinatePlane.setOnMousePressed(this::onMousePressed);
@@ -66,7 +81,17 @@ public class CoordinatePlaneController extends BaseController {
 
         // Добавляем обработчики событий для точек
         coordinatePlane.setOnMouseClicked(this::onPointClicked);
+    }
 
+    private CompletableFuture<Response> sendRequestAsync(Request request) {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                udpGui.createSocket();
+                return udpGui.sendRequest(request);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 
     private void onMousePressed(MouseEvent event) {
@@ -83,7 +108,6 @@ public class CoordinatePlaneController extends BaseController {
         lastY = event.getY();
 
         redrawCoordinatePlane(); // Перерисовываем координатную плоскость и точки при перемещении мыши
-        // Добавляем обработчики событий для точек
     }
 
     private void redrawCoordinatePlane() {
@@ -99,7 +123,6 @@ public class CoordinatePlaneController extends BaseController {
 
         // Перерисовываем точки с учетом смещения
         drawPoints(gc, width, height);
-
     }
 
     private void drawCoordinatePlane(GraphicsContext gc, double width, double height) {
@@ -125,7 +148,6 @@ public class CoordinatePlaneController extends BaseController {
         }
     }
 
-
     private void onPointClicked(MouseEvent event) {
         double mouseX = event.getX();
         double mouseY = event.getY();
@@ -135,7 +157,6 @@ public class CoordinatePlaneController extends BaseController {
 
         // Проверяем, попадает ли нажатие мыши в радиус какой-либо точки
         for (String login : loginCoord.keySet()) {
-
             for (Coordinates point : loginCoord.get(login)) {
                 double scaledX = coordinatePlane.getWidth() / 2 + point.getX() * SCALE + dragOffsetX;
                 double scaledY = coordinatePlane.getHeight() / 2 - point.getY() * SCALE + dragOffsetY;

@@ -18,8 +18,6 @@ public class Main extends ApplicationAbsract {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/index.fxml"));
         Parent root = loader.load();
-        MainController controller = (MainController) loader.getController();
-        controller.setUdpClient(this.udpGui);
 
         primaryStage.setTitle("Стена");
 

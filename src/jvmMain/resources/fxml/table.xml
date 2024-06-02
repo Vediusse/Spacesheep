@@ -5,55 +5,28 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox xmlns="http://javafx.com/javafx"
+<VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:id="root"
-      fx:controller="io.github.zeculesu.itmo.prog5.GUI.Controllers.TableController"
-      styleClass="root"
-      spacing="0"
-      fillHeight="true"
-      HBox.hgrow="ALWAYS">
+      fx:controller="io.github.zeculesu.itmo.prog5.GUI.Controllers.EditController"
+      spacing="10"
+      alignment="CENTER"
+>
+    <Label fx:id="mainHeader" text="Таблица" styleClass="main-header"/>
 
-    <!-- Sidebar -->
-    <VBox fx:id="sidebar" styleClass="sidebar">
-        <Label fx:id="sidebarTitle" text="SpaceMartini" styleClass="sidebar-title"/>
-        <VBox fx:id="sidebarButtons" styleClass="sidebar-buttons">
-            <Button fx:id="wallButton" text="Стена" styleClass="sidebar-button"/>
-            <Button fx:id="catalogButton" text="Карта" styleClass="sidebar-button"/>
-            <Button fx:id="tableButton" text="Таблица" styleClass="sidebar-button"/>
-            <Button fx:id="workshopButton" text="Мастерская" styleClass="sidebar-button"/>
-            <Button fx:id="settingsButton" text="Настройка" styleClass="sidebar-button"/>
-        </VBox>
-    </VBox>
-
-    <!-- Main Content Area -->
-    <VBox fx:id="mainContent" styleClass="main-content" HBox.hgrow="ALWAYS">
-        <VBox fx:id="header" styleClass="header">
-            <TextField fx:id="userTextField" promptText="Поиск" styleClass="header-search"/>
-        </VBox>
-
-        <HBox styleClass="content-padding" VBox.vgrow="ALWAYS">
-            <VBox fx:id="content" styleClass="content" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
-                <Label fx:id="mainHeader" text="Таблица" styleClass="main-header"/>
-
-                <!-- TableView -->
-                <TableView fx:id="tableView" styleClass="custom-table">
-                    <columns>
-                        <TableColumn fx:id="nameColumn" text="Имя"/>
-                        <TableColumn fx:id="coordinatesColumn" text="Координаты"/>
-                        <TableColumn fx:id="creationDateColumn" text="Дата создания"/>
-                        <TableColumn fx:id="healthColumn" text="Здоровье"/>
-                        <TableColumn fx:id="categoryColumn" text="Категория"/>
-                        <TableColumn fx:id="weaponTypeColumn" text="Тип оружия"/>
-                        <TableColumn fx:id="meleeWeaponColumn" text="Ближнее оружие"/>
-                        <TableColumn fx:id="chapterNameColumn" text="Имя главы"/>
-                        <TableColumn fx:id="chapterLegionColumn" text="Легион главы"/>
-                        <TableColumn fx:id="ownerColumn" text="Владелец"/>
-                    </columns>
-                </TableView>
-
-            </VBox>
-        </HBox>
-
-    </VBox>
-</HBox>
+    <!-- TableView -->
+    <TableView fx:id="tableView" styleClass="custom-table">
+        <columns>
+            <TableColumn fx:id="nameColumn" text="Имя"/>
+            <TableColumn fx:id="xCoordinateColumn" text="Координата X"/>
+            <TableColumn fx:id="yCoordinateColumn" text="Координата Y"/>
+            <TableColumn fx:id="creationDateColumn" text="Дата создания"/>
+            <TableColumn fx:id="healthColumn" text="Здоровье"/>
+            <TableColumn fx:id="categoryColumn" text="Категория"/>
+            <TableColumn fx:id="weaponTypeColumn" text="Тип оружия"/>
+            <TableColumn fx:id="meleeWeaponColumn" text="Ближнее оружие"/>
+            <TableColumn fx:id="chapterNameColumn" text="Имя главы"/>
+            <TableColumn fx:id="chapterLegionColumn" text="Легион главы"/>
+            <TableColumn fx:id="ownerColumn" text="Владелец"/>
+        </columns>
+    </TableView>
+</VBox>

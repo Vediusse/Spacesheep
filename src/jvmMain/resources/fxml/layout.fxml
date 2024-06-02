@@ -2,39 +2,83 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 
-<HBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:id="root"
-      fx:controller="io.github.zeculesu.itmo.prog5.GUI.Controllers.MainController"
-      styleClass="root"
-      spacing="0"
-      fillHeight="true"
-      HBox.hgrow="ALWAYS">
+<StackPane xmlns="http://javafx.com/javafx"
+           xmlns:fx="http://javafx.com/fxml"
+           fx:id="root"
+           fx:controller="io.github.zeculesu.itmo.prog5.GUI.Controllers.MainController"
+           styleClass="root">
 
-    <!-- Sidebar -->
-    <VBox fx:id="sidebar" styleClass="sidebar">
-        <Label fx:id="sidebarTitle" styleClass="sidebar-title"/>
-        <VBox fx:id="sidebarButtons" styleClass="sidebar-buttons">
-            <Button fx:id="wallButton" styleClass="sidebar-button"/>
-            <Button fx:id="catalogButton" styleClass="sidebar-button"/>
-            <Button fx:id="tableButton" styleClass="sidebar-button"/>
-            <Button fx:id="workshopButton" styleClass="sidebar-button"/>
-            <Button fx:id="settingsButton" styleClass="sidebar-button"/>
+    <!-- Main Content Area with Sidebar and Header -->
+    <HBox spacing="0" fillHeight="true" HBox.hgrow="ALWAYS">
+        <!-- Sidebar -->
+        <VBox fx:id="sidebar" styleClass="sidebar">
+            <Label fx:id="sidebarTitle" styleClass="sidebar-title"/>
+            <VBox fx:id="sidebarButtons" styleClass="sidebar-buttons">
+                <Button fx:id="wallButton" styleClass="sidebar-button"/>
+                <Button fx:id="catalogButton" styleClass="sidebar-button"/>
+                <Button fx:id="tableButton" styleClass="sidebar-button"/>
+                <Button fx:id="workshopButton" styleClass="sidebar-button"/>
+                <Button fx:id="settingsButton" styleClass="sidebar-button"/>
+            </VBox>
         </VBox>
-    </VBox>
 
-    <!-- Main Content Area -->
-    <VBox fx:id="mainContent" styleClass="main-content" HBox.hgrow="ALWAYS">
-        <VBox fx:id="header" styleClass="header">
-            <TextField fx:id="userTextField" styleClass="header-search"/>
-        </VBox>
-        <ScrollPane styleClass="scroll-pane" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS">
-            <HBox styleClass="content-padding" VBox.vgrow="ALWAYS">
-                <VBox fx:id="content" styleClass="content">
-                    <!-- Content will be added here dynamically -->
-                </VBox>
+        <!-- Main Content Area -->
+        <VBox fx:id="mainContent" styleClass="main-content" HBox.hgrow="ALWAYS">
+            <HBox fx:id="header" styleClass="header" style="-fx-spacing: 20">
+                <Button id="ru" onAction="#changeLocale" styleClass="language-button">
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@/img/flags/rus.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button id="es" onAction="#changeLocale" styleClass="language-button">
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@/img/flags/ess.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button id="mk" onAction="#changeLocale" styleClass="language-button">
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@/img/flags/mk.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button id="lt" onAction="#changeLocale" styleClass="language-button">
+                    <graphic>
+                        <ImageView>
+                            <image>
+                                <Image url="@/img/flags/Litva_kur.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
             </HBox>
-        </ScrollPane>
-    </VBox>
-</HBox>
+            <ScrollPane styleClass="scroll-pane" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS" fitToHeight="true">
+                <HBox styleClass="content-padding" VBox.vgrow="ALWAYS">
+                    <VBox fx:id="content" styleClass="content">
+                        <!-- Main content goes here -->
+                    </VBox>
+                </HBox>
+            </ScrollPane>
+        </VBox>
+    </HBox>
+
+    <!-- Notifications Container -->
+    <AnchorPane mouseTransparent="true">
+        <VBox fx:id="notificationsContainer" styleClass="notifications-container" AnchorPane.topAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <!-- Notifications content goes here -->
+        </VBox>
+    </AnchorPane>
+</StackPane>
