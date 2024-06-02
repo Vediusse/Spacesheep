@@ -15,7 +15,6 @@ public class SignUp extends ApplicationAbsract {
         Parent root = loader.load();
 
         BaseController controller = loader.getController();
-        controller.setUdpClient(this.udpGui);
 
         primaryStage.setTitle("Sign Up");
         Scene scene = new Scene(root, 1080, 640); // Размер окна

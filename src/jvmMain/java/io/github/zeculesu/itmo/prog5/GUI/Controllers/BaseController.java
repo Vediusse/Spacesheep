@@ -12,7 +12,8 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public abstract class BaseController {
-    protected UDPGui udpGui = new UDPGui("127.0.0.1",45003);
+
+    protected UDPGui udpGui = new UDPGui("127.0.0.1",45004);
     private static String password;
 
     private static String login;

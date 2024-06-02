@@ -31,9 +31,44 @@
 
     <!-- Main Content Area -->
     <VBox fx:id="mainContent" styleClass="main-content" HBox.hgrow="ALWAYS">
-        <VBox fx:id="header" styleClass="header" >
-            <TextField fx:id="userTextField" styleClass="header-search"/>
-        </VBox>
+        <HBox fx:id="header" styleClass="header" spacing="20">
+            <Button id="ru" onAction="#changeLocale" styleClass="language-button">
+                <graphic>
+                    <ImageView>
+                        <image>
+                            <Image url="@/img/flags/rus.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button id="es" onAction="#changeLocale" styleClass="language-button">
+                <graphic>
+                    <ImageView>
+                        <image>
+                            <Image url="@/img/flags/ess.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button id="mk" onAction="#changeLocale" styleClass="language-button">
+                <graphic>
+                    <ImageView>
+                        <image>
+                            <Image url="@/img/flags/mk.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+            <Button id="lt" onAction="#changeLocale" styleClass="language-button">
+                <graphic>
+                    <ImageView>
+                        <image>
+                            <Image url="@/img/flags/Litva_kur.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </HBox>
         <ScrollPane styleClass="scroll-pane" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="ALWAYS">
             <HBox styleClass="content-padding" VBox.vgrow="ALWAYS">
                 <VBox fx:id="content" styleClass="content">

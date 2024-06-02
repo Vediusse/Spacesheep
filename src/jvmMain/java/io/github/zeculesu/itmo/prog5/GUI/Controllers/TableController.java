@@ -3,6 +3,7 @@ package io.github.zeculesu.itmo.prog5.GUI.Controllers;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Cruds;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Main;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.MapMarines;
+import io.github.zeculesu.itmo.prog5.GUI.Windows.Settings;
 import io.github.zeculesu.itmo.prog5.models.SpaceMarine;
 import io.github.zeculesu.itmo.prog5.models.Request;
 import io.github.zeculesu.itmo.prog5.models.Response;
@@ -63,25 +64,11 @@ public class TableController extends BaseController {
     @FXML
     private TableColumn<SpaceMarine, String> ownerColumn;
 
-    @FXML
-    private Button wallButton;
 
-    @FXML
-    private Button catalogButton;
-
-    @FXML
-    private Button tableButton;
-
-    @FXML
-    private Button workshopButton;
-
-    @FXML
-    private Button settingsButton;
 
     @FXML
     public void initialize() {
         // Initialize the table columns
-        tableView.prefHeightProperty().bind(content.heightProperty().multiply(0.75));
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         coordinatesColumn.setCellValueFactory(cellData -> {
@@ -109,40 +96,6 @@ public class TableController extends BaseController {
 
         // Set localized text
 
-
-        wallButton.setOnAction(e -> {
-            Main main = new Main();
-            Stage currentStage = (Stage) wallButton.getScene().getWindow();
-            try {
-                main.start(new Stage());
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-            currentStage.close();
-        });
-
-        catalogButton.setOnAction(e -> {
-            MapMarines Table = new MapMarines();
-            Stage currentStage = (Stage) tableButton.getScene().getWindow();
-            try {
-                Table.start(new Stage());
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-            currentStage.close();
-        });
-
-        workshopButton.setOnAction(e->{
-            Cruds main = new Cruds();
-            Stage currentStage = (Stage) workshopButton.getScene().getWindow();
-            try {
-                main.start(new Stage());
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-            currentStage.close();
-        });
-
         this.bundle = ResourceManager.getInstance().getResourceBundle();
         this.updateTexts();
         ResourceManager.getInstance().localeProperty().addListener((observable, oldValue, newValue) -> {
@@ -151,11 +104,6 @@ public class TableController extends BaseController {
     }
 
     public void updateTexts(){
-        wallButton.setText(bundle.getString("wallButton"));
-        catalogButton.setText(bundle.getString("catalogButton"));
-        tableButton.setText(bundle.getString("tableButton"));
-        workshopButton.setText(bundle.getString("workshopButton"));
-        settingsButton.setText(bundle.getString("settingsButton"));
         nameColumn.setText(bundle.getString("nameColumn"));
         coordinatesColumn.setText(bundle.getString("coordinatesColumn"));
         creationDateColumn.setText(bundle.getString("creationDateColumn"));
