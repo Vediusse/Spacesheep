@@ -87,7 +87,6 @@ public class AddController extends BaseController {
 
     @FXML
     public void initialize() {
-        setLocale(Locale.getDefault());
         errorLabel.setVisible(false);
 
         this.bundle = ResourceManager.getInstance().getResourceBundle();

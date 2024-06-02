@@ -91,6 +91,11 @@ public class SignUpController extends BaseController {
             }
             currentStage.close();
         });
+        this.bundle = ResourceManager.getInstance().getResourceBundle();
+        this.updateTexts();
+        ResourceManager.getInstance().localeProperty().addListener((observable, oldValue, newValue) -> {
+            updateTexts();
+        });
     }
     public void setLocale(Locale locale) {
         bundle = ResourceBundle.getBundle("messages", locale);

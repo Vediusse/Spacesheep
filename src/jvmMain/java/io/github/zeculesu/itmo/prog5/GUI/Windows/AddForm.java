@@ -17,13 +17,10 @@ public class AddForm extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
 
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/add.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root, 1080, 640); // Размер окна
         scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/style/add.css")).toExternalForm());
-
-        AddController controller = (AddController) loader.getController();
 
         primaryStage.setTitle("New Ship Creation");
         primaryStage.setScene(scene);

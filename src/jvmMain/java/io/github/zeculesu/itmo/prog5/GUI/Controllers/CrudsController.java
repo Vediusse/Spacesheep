@@ -6,11 +6,27 @@ import io.github.zeculesu.itmo.prog5.GUI.Windows.Delete;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Edit;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class CrudsController extends BaseController{
+    @FXML
+    private Button creationButton;
 
+    @FXML
+    private Text createShipText;
+
+
+    @FXML
+    private Text deleteShipText;
+
+    @FXML
+    private Button findButton;
+
+    @FXML
+    private Text findShipText;
 
     @FXML
     private Label mainHeader;
@@ -50,4 +66,10 @@ public class CrudsController extends BaseController{
 
     }
 
+    public void updateTexts() {
+        mainHeader.setText(bundle.getString("mainHeader"));
+        createShipText.setText(bundle.getString("createShipText"));
+        deleteShipText.setText(bundle.getString("deleteShipText"));
+        findShipText.setText(bundle.getString("findShipText"));
+    }
 }
