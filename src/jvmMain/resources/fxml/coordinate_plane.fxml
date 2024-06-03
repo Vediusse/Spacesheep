@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.StackPane?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="io.github.zeculesu.itmo.prog5.GUI.Controllers.CoordinatePlaneController"
       spacing="10"
       alignment="CENTER">
-    <Canvas fx:id="coordinatePlane" width="800" height="600"/>
+    <StackPane alignment="TOP_RIGHT">
+        <Canvas fx:id="coordinatePlane" width="800" height="600"/>
+        <Label fx:id="pointInfoLabelX" style="-fx-text-fill: white; -fx-padding: 10; -fx-translate-x: -20; -fx-translate-y: 20;" visible="false"/>
+        <Label fx:id="pointInfoLabelY" style="-fx-text-fill: white; -fx-padding: 10; -fx-translate-x: -20; -fx-translate-y: 40;" visible="false"/>
+        <Label fx:id="pointInfoLabelLogin" style="-fx-text-fill: white; -fx-padding: 10; -fx-translate-x: -20; -fx-translate-y: 60;" visible="false"/>
+    </StackPane>
 </VBox>
