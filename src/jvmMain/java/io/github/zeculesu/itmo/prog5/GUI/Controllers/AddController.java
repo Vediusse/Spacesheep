@@ -90,10 +90,8 @@ public class AddController extends BaseController {
         errorLabel.setVisible(false);
 
         this.bundle = ResourceManager.getInstance().getResourceBundle();
-        this.updateTexts();
-        ResourceManager.getInstance().localeProperty().addListener((observable, oldValue, newValue) -> {
-            updateTexts();
-        });
+        updateTexts();
+        ResourceManager.getInstance().registerController(this);
 
         // Populate the ComboBoxes
         categoryField.setItems(FXCollections.observableArrayList("SCOUT", "SUPPRESSOR", "LIBRARIAN", "HELIX"));
@@ -186,6 +184,7 @@ public class AddController extends BaseController {
     }
 
     public void updateTexts(){
+        bundle = ResourceManager.getInstance().getResourceBundle();
         titleLabel.setText(bundle.getString("createNewShip"));
         nameField.setPromptText(bundle.getString("namePrompt"));
         nameErrorLabel.setText(bundle.getString("nameError"));

@@ -206,7 +206,8 @@ public class MainController extends BaseController {
         }
         ResourceManager.getInstance().setLocale(locale);
         this.bundle = ResourceManager.getInstance().getResourceBundle();
-        this.updateTexts();
+        updateTexts();
+        ResourceManager.getInstance().registerController(this);
         highlightActiveLanguage(buttonId);
     }
 
