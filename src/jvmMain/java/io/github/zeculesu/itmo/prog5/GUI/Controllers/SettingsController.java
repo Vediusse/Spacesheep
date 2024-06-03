@@ -36,7 +36,6 @@ public class SettingsController extends BaseController {
         sendRequestAsync(request).thenAccept(response -> {
             Platform.runLater(() -> {
                 try {
-                    System.out.print(response.getOutput());
                     List<String> output = response.getOutput();
                     this.typeCollection = output.get(0);
                     this.countCollection = output.get(1);
