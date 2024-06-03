@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="io.github.zeculesu.itmo.prog5.GUI.Controllers.SettingsController"
-      spacing="10"
-      alignment="CENTER">
+      spacing="20"
+      alignment="CENTER"
+      style="-fx-background-color: #000000; -fx-padding: 40; -fx-alignment: CENTER;">
 
-    <HBox alignment="CENTER" style="-fx-spacing: 20; -fx-padding: 20 0 20 0">
-        <Button text="ру" onAction="#changeLocale" fx:id="ru"/>
-        <Button text="es" onAction="#changeLocale" fx:id="es"/>
-        <Button text="mak" onAction="#changeLocale" fx:id="mak"/>
-        <Button text="елл" onAction="#changeLocale" fx:id="ell"/>
-    </HBox>
+    <Label fx:id="owner"
+           style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+    <Label fx:id="info"
+           style="-fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 0 0 20 0;"/>
+
+    <Button fx:id="exit"
+            onAction="#exit"
+            text="Exit"
+            style="-fx-background-color: #E74C3C; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-background-radius: 5;"/>
 
 </VBox>
