@@ -129,6 +129,10 @@ public class EditController extends BaseController {
         // Load data into the table
         ObservableList<SpaceMarine> data = getData();
         tableView.setItems(data);
+
+        this.bundle = ResourceManager.getInstance().getResourceBundle();
+        updateTexts();
+        ResourceManager.getInstance().registerController(this);
     }
 
     private void handleEditCommit(TableColumn.CellEditEvent<SpaceMarine, ?> event, String field) {
@@ -245,5 +249,20 @@ public class EditController extends BaseController {
             e.printStackTrace();
             // Optionally, show an error message to the user if the input is invalid
         }
+    }
+
+    public void updateTexts(){
+        this.bundle = ResourceManager.getInstance().getResourceBundle();
+        nameColumn.setText(bundle.getString("nameColumn"));
+        xCoordinateColumn.setText(bundle.getString("coordinatesXPrompt"));
+        yCoordinateColumn.setText(bundle.getString("coordinatesYPrompt"));
+        creationDateColumn.setText(bundle.getString("creationDateColumn"));
+        healthColumn.setText(bundle.getString("healthColumn"));
+        categoryColumn.setText(bundle.getString("categoryColumn"));
+        weaponTypeColumn.setText(bundle.getString("weaponTypeColumn"));
+        meleeWeaponColumn.setText(bundle.getString("meleeWeaponColumn"));
+        chapterNameColumn.setText(bundle.getString("chapterNameColumn"));
+        chapterLegionColumn.setText(bundle.getString("chapterLegionColumn"));
+        ownerColumn.setText(bundle.getString("ownerColumn"));
     }
 }
