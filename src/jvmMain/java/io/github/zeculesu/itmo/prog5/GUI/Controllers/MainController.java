@@ -205,14 +205,9 @@ public class MainController extends BaseController {
                 break;
         }
         ResourceManager.getInstance().setLocale(locale);
-        setLocale(locale);
-        updateTexts();
+        this.bundle = ResourceManager.getInstance().getResourceBundle();
+        this.updateTexts();
         highlightActiveLanguage(buttonId);
-    }
-
-    public void setLocale(Locale locale) {
-        bundle = ResourceBundle.getBundle("messages", locale);
-        updateTexts();
     }
 
     public void updateTexts() {
