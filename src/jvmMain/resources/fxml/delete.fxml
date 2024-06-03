@@ -32,9 +32,9 @@
     </TableView>
 
     <HBox alignment="CENTER" style="-fx-spacing: 20; -fx-padding: 20 0 0 0">
-        <Button text="Удалить выбранный элемент" style="-fx-spacing: 20" onAction="#deleteId"/>
-        <Button text="Удалить Первый записи" onAction="#deleteLast"/>
-        <Button text="Удалить всех с определенным ближним оружием" onAction="#deleteFirst"/>
+        <Button fx:id="deleteSelectedButton" style="-fx-spacing: 20" onAction="#deleteId"/>
+        <Button fx:id="deleteFirstButton" onAction="#deleteLast"/>
+        <Button fx:id="deleteByWeaponButton" onAction="#deleteFirst"/>
     </HBox>
 </VBox>
 

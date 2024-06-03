@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -60,12 +61,20 @@ public class DeleteController extends BaseController {
 
     @FXML
     private TableColumn<SpaceMarine, String> ownerColumn;
+    @FXML
+    private Button deleteSelectedButton;
 
     @FXML
-    private VBox notificationsContainer;
+    private Button deleteFirstButton;
+
+    @FXML
+    private Button deleteByWeaponButton;
 
     @FXML
     public void initialize() {
+        this.bundle = ResourceManager.getInstance().getResourceBundle();
+        updateTexts();
+        ResourceManager.getInstance().registerController(this);
         // Initialize the table columns
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         coordinatesColumn.setCellValueFactory(cellData -> {
@@ -194,5 +203,13 @@ public class DeleteController extends BaseController {
         } else {
             NotificationManager.getInstance().showNotification("Ничего не выбрано.", "error");
         }
+    }
+
+    @Override
+    public void updateTexts() {
+        bundle = ResourceManager.getInstance().getResourceBundle();
+        deleteSelectedButton.setText(bundle.getString("deleteSelectedButton"));
+        deleteFirstButton.setText(bundle.getString("deleteFirstButton"));
+        deleteByWeaponButton.setText(bundle.getString("deleteByWeaponButton"));
     }
 }
