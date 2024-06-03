@@ -22,7 +22,7 @@
             <graphic>
                 <VBox alignment="CENTER" spacing="10">
                     <Text text="+" styleClass="create-ship-text-big"/>
-                    <Text text="Создать новый корабль" styleClass="create-ship-text"/>
+                    <Text fx:id="createShipText" styleClass="create-ship-text"/>
                 </VBox>
             </graphic>
 
@@ -31,7 +31,7 @@
             <graphic>
                 <VBox alignment="CENTER" spacing="10">
                     <Text text="-" styleClass="create-ship-text-big"/>
-                    <Text text="Удаление кораблей" styleClass="create-ship-text"/>
+                    <Text fx:id="deleteShipText" styleClass="create-ship-text"/>
                 </VBox>
             </graphic>
 
@@ -40,7 +40,7 @@
             <graphic>
                 <VBox alignment="CENTER" spacing="10">
                     <Text text="?" styleClass="create-ship-text-big" style="-fx-text-fill: #777"/>
-                    <Text text="Изменить корабль" styleClass="create-ship-text"/>
+                    <Text fx:id="findShipText" styleClass="create-ship-text"/>
                 </VBox>
             </graphic>
         </Button>

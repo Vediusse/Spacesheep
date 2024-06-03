@@ -106,7 +106,7 @@ public class AddController extends BaseController {
         try {
             String name = nameField.getText();
             Long x = Long.parseLong(coordinatesXField.getText());
-            int y = Integer.parseInt(coordinatesYField.getText());
+            float y = Float.parseFloat(coordinatesYField.getText());
             int health = Integer.parseInt(healthField.getText());
             AstartesCategory category = AstartesCategory.valueOf(categoryField.getValue().toUpperCase());
             Weapon weaponType = Weapon.valueOf(weaponTypeField.getValue().toUpperCase());

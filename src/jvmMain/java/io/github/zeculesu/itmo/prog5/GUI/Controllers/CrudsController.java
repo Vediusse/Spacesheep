@@ -30,7 +30,13 @@ public class CrudsController extends BaseController{
 
     @FXML
     private Label mainHeader;
-
+    public void initialize() {
+        this.bundle = ResourceManager.getInstance().getResourceBundle();
+        this.updateTexts();
+        ResourceManager.getInstance().localeProperty().addListener((observable, oldValue, newValue) -> {
+            updateTexts();
+        });
+    }
 
     public void handleCreate(ActionEvent actionEvent) {
         AddForm main = new AddForm();

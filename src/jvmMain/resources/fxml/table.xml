@@ -11,7 +11,6 @@
       spacing="10"
       alignment="CENTER"
 >
-    <Label fx:id="mainHeader" text="Таблица" styleClass="main-header"/>
 
     <!-- TableView -->
     <TableView fx:id="tableView" styleClass="custom-table">
