@@ -283,15 +283,36 @@ ScrollPane {
     -fx-background-color: lightgrey;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
     -fx-background-radius: 5px;
-    -fx-border-radius: 5px;
+    -fx-border-radius: 10px;
+    -fx-margin-bottom: 10px;
+    margin-bottom: 10px; /* установите нужный размер отступа */
+    -fx-opacity: 1.0; /* начальная видимость для плавного исчезновения */
+}
+
+.notification-fade {
+    -fx-opacity: 0.0; /* конечная видимость для анимации исчезновения */
 }
 
 .notification-success {
     -fx-background-color: lightgreen;
+    -fx-padding: 10px;
+    -fx-border-width: 1px;
+    -fx-border-color: black;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+    -fx-background-radius: 5px;
+    -fx-border-radius: 10px;
+    -fx-margin-bottom: 10px;
 }
 
 .notification-error {
     -fx-background-color: lightcoral;
+    -fx-padding: 10px;
+    -fx-border-width: 1px;
+    -fx-border-color: black;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
+    -fx-background-radius: 5px;
+    -fx-border-radius: 10px;
+    -fx-margin-bottom: 10px;
 }
 
 .scroll-pane{

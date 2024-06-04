@@ -77,7 +77,7 @@
 
     <!-- Notifications Container -->
     <AnchorPane mouseTransparent="true">
-        <VBox fx:id="notificationsContainer" styleClass="notifications-container" AnchorPane.topAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <VBox fx:id="notificationsContainer" styleClass="notifications-container" style="-fx-spacing: 10;" AnchorPane.topAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <!-- Notifications content goes here -->
         </VBox>
     </AnchorPane>

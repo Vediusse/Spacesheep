@@ -1,5 +1,6 @@
 package io.github.zeculesu.itmo.prog5.GUI.Controllers;
 
+import io.github.zeculesu.itmo.prog5.GUI.ExecutorResource;
 import io.github.zeculesu.itmo.prog5.GUI.UDPGui;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.SignUp;
 import io.github.zeculesu.itmo.prog5.models.Request;
@@ -42,7 +43,7 @@ public class LogInController extends BaseController {
 
     private static final int TIMEOUT = 3000; // 3 seconds
 
-    private static final ExecutorService executor = Executors.newCachedThreadPool();
+
 
 
     @FXML
@@ -96,7 +97,7 @@ public class LogInController extends BaseController {
             } catch (IOException | ClassNotFoundException e) {
                 throw new RuntimeException("I/O error", e);
             }
-        }, executor).thenAcceptAsync(response -> {
+        }, ExecutorResource.getExecutor()).thenAcceptAsync(response -> {
             Platform.runLater(() -> {
                 if (response.getStatus() == 200) {
                     this.setLogin(username);

@@ -1,5 +1,6 @@
 package io.github.zeculesu.itmo.prog5.GUI;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -42,7 +43,13 @@ public class NotificationManager {
             notificationsContainer.getChildren().add(notificationLabel);
 
             PauseTransition pause = new PauseTransition(Duration.seconds(5));
-            pause.setOnFinished(event -> notificationsContainer.getChildren().remove(notificationLabel));
+            pause.setOnFinished(event -> {
+                // Создаем анимацию плавного исчезновения
+                FadeTransition fade = new FadeTransition(Duration.seconds(1), notificationLabel);
+                fade.setToValue(0.0);
+                fade.setOnFinished(e -> notificationsContainer.getChildren().remove(notificationLabel));
+                fade.play();
+            });
             pause.play();
         });
     }

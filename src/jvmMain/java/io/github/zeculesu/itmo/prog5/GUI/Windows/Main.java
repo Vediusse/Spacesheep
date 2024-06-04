@@ -5,6 +5,7 @@ import io.github.zeculesu.itmo.prog5.GUI.Controllers.BaseController;
 import io.github.zeculesu.itmo.prog5.GUI.Controllers.CrudsController;
 import io.github.zeculesu.itmo.prog5.GUI.Controllers.MainController;
 import io.github.zeculesu.itmo.prog5.GUI.Controllers.ResourceManager;
+import io.github.zeculesu.itmo.prog5.GUI.ExecutorResource;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -29,6 +30,15 @@ public class Main extends ApplicationAbsract {
         primaryStage.show();
         primaryStage.requestFocus();
     }
+
+    @Override
+    public void stop() throws Exception {
+        // Перед тем как приложение закроется, вы можете вызвать метод shutdownExecutor
+        ExecutorResource.shutdownExecutor();
+
+        // Если у вас есть другие ресурсы для очистки, сделайте это здесь
+    }
+
 
     public static void main(String[] args) {
         launch(args);

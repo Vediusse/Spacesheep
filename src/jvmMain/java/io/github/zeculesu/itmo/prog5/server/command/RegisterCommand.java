@@ -31,6 +31,7 @@ public class RegisterCommand extends AbstractCommand {
         try{
             Connection connection = env.getConnection().connect();
             JDBCUsers.register(connection, login, password);
+            response.setStatus(200);
             response.setMessage("Регистрация успешно пройдена");
         }
 
