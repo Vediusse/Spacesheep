@@ -104,6 +104,7 @@ public class TableController extends BaseController {
     }
 
     public void updateTexts(){
+        this.bundle = ResourceManager.getInstance().getResourceBundle();
         nameColumn.setText(bundle.getString("nameColumn"));
         coordinatesColumn.setText(bundle.getString("coordinatesColumn"));
         creationDateColumn.setText(bundle.getString("creationDateColumn"));

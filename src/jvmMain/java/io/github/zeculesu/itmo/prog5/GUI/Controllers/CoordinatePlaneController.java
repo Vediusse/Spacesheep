@@ -1,9 +1,5 @@
 package io.github.zeculesu.itmo.prog5.GUI.Controllers;
 
-import io.github.zeculesu.itmo.prog5.GUI.UDPGui;
-import io.github.zeculesu.itmo.prog5.GUI.Windows.Main;
-import io.github.zeculesu.itmo.prog5.GUI.Windows.MapMarines;
-import io.github.zeculesu.itmo.prog5.GUI.Windows.Table;
 import io.github.zeculesu.itmo.prog5.models.Coordinates;
 import io.github.zeculesu.itmo.prog5.models.Request;
 import io.github.zeculesu.itmo.prog5.models.Response;
@@ -14,7 +10,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
+import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,6 +36,12 @@ public class CoordinatePlaneController extends BaseController {
 
     @FXML
     private Button settingsButton;
+    @FXML
+    private Label pointInfoLabelX;
+    @FXML
+    private Label pointInfoLabelY;
+    @FXML
+    private Label pointInfoLabelLogin;
 
     private final double AXIS_WIDTH = 2.0; // Ширина осей координат
     private final Color AXIS_COLOR = Color.FLORALWHITE; // Цвет осей координат
@@ -55,6 +57,9 @@ public class CoordinatePlaneController extends BaseController {
     private Map<String, ArrayList<Coordinates>> loginCoord; // Список точек для отображения
 
     public void initialize() {
+        this.bundle = ResourceManager.getInstance().getResourceBundle();
+        updateTexts();
+        ResourceManager.getInstance().registerController(this);
         // Asynchronous request to get coordinates
         Request request = new Request();
         request.setCommand("getlogincoords");
@@ -162,7 +167,15 @@ public class CoordinatePlaneController extends BaseController {
                 double scaledY = coordinatePlane.getHeight() / 2 - point.getY() * SCALE + dragOffsetY;
                 if (Math.pow(mouseX - scaledX, 2) + Math.pow(mouseY - scaledY, 2) <= Math.pow(clickRadius, 2)) {
                     // Если попали в точку, выводим информацию о ней
-                    System.out.println("Clicked point: (" + point.getX() + ", " + point.getY() + ")");
+//                    pointInfoLabelX.setText(pointInfoLabelX.getText() + point.getX());
+//                    pointInfoLabelY.setText(pointInfoLabelY.getText() + point.getY());
+//                    pointInfoLabelLogin.setText(pointInfoLabelLogin.getText() + login);
+                    pointInfoLabelX.setText(bundle.getString("coordinatesXPrompt") + " = " + point.getX());
+                    pointInfoLabelY.setText(bundle.getString("coordinatesYPrompt") + " = " + point.getY());
+                    pointInfoLabelLogin.setText(bundle.getString("ownerColumn") + ": " + login);
+                    pointInfoLabelX.setVisible(true);
+                    pointInfoLabelY.setVisible(true);
+                    pointInfoLabelLogin.setVisible(true);
                     return;
                 }
             }
@@ -171,5 +184,12 @@ public class CoordinatePlaneController extends BaseController {
 
     public void setPoints(Map<String, ArrayList<Coordinates>> loginCoord) {
         this.loginCoord = loginCoord;
+    }
+
+    public void updateTexts() {
+        bundle = ResourceManager.getInstance().getResourceBundle();
+        pointInfoLabelX.setVisible(false);
+        pointInfoLabelY.setVisible(false);
+        pointInfoLabelLogin.setVisible(false);
     }
 }

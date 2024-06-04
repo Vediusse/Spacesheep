@@ -24,7 +24,6 @@ public class Cruds extends ApplicationAbsract {
         VBox mainContent = (VBox) scrollPane.getContent().lookup("#content");  // Обратите внимание на # перед content
         mainContent.getChildren().add(coordinateRoot);
 
-        CrudsController controller = (CrudsController) coordinateLoader.getController();
 
         Scene scene = new Scene(mainRoot, 1080, 640);
         scene.getStylesheets().add(getClass().getResource("/style/cruds.css").toExternalForm()); // Подключаем CSS

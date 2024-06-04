@@ -116,6 +116,7 @@ public class MainController extends BaseController {
 
     @FXML
     public void initialize() {
+        highlightActiveLanguage(LanguageManager.getInstance().getActiveLanguageButtonId());
         StackPane.setAlignment(notificationsContainer, Pos.TOP_RIGHT);
         notificationsContainer.setPadding(new Insets(10)); // padding to move it away from the edge
 
@@ -179,7 +180,6 @@ public class MainController extends BaseController {
         ResourceManager.getInstance().localeProperty().addListener((observable, oldValue, newValue) -> {
             updateTexts();
         });
-
     }
 
 
@@ -205,14 +205,10 @@ public class MainController extends BaseController {
                 break;
         }
         ResourceManager.getInstance().setLocale(locale);
-        setLocale(locale);
-        updateTexts();
+        this.bundle = ResourceManager.getInstance().getResourceBundle();
+        this.updateTexts();
         highlightActiveLanguage(buttonId);
-    }
-
-    public void setLocale(Locale locale) {
-        bundle = ResourceBundle.getBundle("messages", locale);
-        updateTexts();
+        LanguageManager.getInstance().setActiveLanguageButtonId(buttonId);
     }
 
     public void updateTexts() {

@@ -1,51 +1,85 @@
 package io.github.zeculesu.itmo.prog5.GUI.Controllers;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+
+import io.github.zeculesu.itmo.prog5.GUI.NotificationManager;
+import io.github.zeculesu.itmo.prog5.GUI.Windows.LogIn;
+import io.github.zeculesu.itmo.prog5.GUI.Windows.Settings;
+import io.github.zeculesu.itmo.prog5.models.Request;
+import io.github.zeculesu.itmo.prog5.models.Response;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import io.github.zeculesu.itmo.prog5.GUI.Windows.Settings;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 public class SettingsController extends BaseController {
 
 
-    private Settings settings; // Добавьте поле для хранения ссылки на объект Settings
+    @FXML
+    public Label owner;
+    @FXML
+    public Button exit;
+    public String typeCollection;
+    public String countCollection;
+    @FXML
+    public Label info;
 
-    public void setSettings(Settings settings) {
-        this.settings = settings;
+    public void initialize() {
+        Request request = new Request();
+        request.setCommand("info");
+        request.setLogin(this.getLogin());
+        request.setPassword(this.getPassword());
+
+        sendRequestAsync(request).thenAccept(response -> {
+            Platform.runLater(() -> {
+                try {
+                    List<String> output = response.getOutput();
+                    this.typeCollection = output.get(0);
+                    this.countCollection = output.get(1);
+                    updateTexts();
+                } catch (Exception ignored) {
+                }
+            });
+        }).exceptionally(e -> null);
+
+        updateTexts();
+        ResourceManager.getInstance().registerController(this);
     }
 
-
-
-    public void changeLocale(ActionEvent actionEvent) {
-        String buttonId = ((Button) actionEvent.getSource()).getId();
-        Locale locale;
-        switch (buttonId) {
-            case "ru":
-                ResourceManager.getInstance().setLocale(new Locale("ru"));
-                break;
-            case "es":
-                ResourceManager.getInstance().setLocale(new Locale("es","CO"));
-                break;
-            case "mak":
-                ResourceManager.getInstance().setLocale(new Locale("mk"));
-                break;
-            case "ell":
-                ResourceManager.getInstance().setLocale(new Locale("lt"));
-
-                break;
-            default:
-                locale = Locale.getDefault();
-                break;
+    public void exit(ActionEvent actionEvent) {
+        LogIn logIn = new LogIn();
+        Stage currentStage = (Stage) owner.getScene().getWindow();
+        try {
+            logIn.start(new Stage());
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
         }
-
+        currentStage.close();
     }
 
-    public void setLocale(Locale locale) {
-        Locale.setDefault(locale);
-        this.bundle = ResourceBundle.getBundle("messages", locale);
+
+    public void updateTexts() {
+        bundle = ResourceManager.getInstance().getResourceBundle();
+        owner.setText(bundle.getString("owner") + " " + getLogin());
+        exit.setText(bundle.getString("exit"));
+        if (typeCollection != null) info.setText(bundle.getString("info") + "\n");
+        if (countCollection != null) {
+            String[] out = countCollection.split(" ");
+            String count = out[out.length - 1];
+            info.setText(info.getText() + bundle.getString("count") + " " + count);
+        }
+    }
+
+    private CompletableFuture<Response> sendRequestAsync(Request request) {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                return udpGui.sendRequest(request);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }
-
-// Определите метод updateTexts здесь, если он
