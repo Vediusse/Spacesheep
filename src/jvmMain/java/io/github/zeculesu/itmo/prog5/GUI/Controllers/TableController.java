@@ -1,5 +1,7 @@
 package io.github.zeculesu.itmo.prog5.GUI.Controllers;
 
+import io.github.zeculesu.itmo.prog5.GUI.ExecutorResource;
+import io.github.zeculesu.itmo.prog5.GUI.NotificationManager;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Cruds;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Main;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.MapMarines;
@@ -7,6 +9,7 @@ import io.github.zeculesu.itmo.prog5.GUI.Windows.Settings;
 import io.github.zeculesu.itmo.prog5.models.SpaceMarine;
 import io.github.zeculesu.itmo.prog5.models.Request;
 import io.github.zeculesu.itmo.prog5.models.Response;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,6 +28,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.concurrent.CompletableFuture;
 
 public class TableController extends BaseController {
 
@@ -91,8 +95,7 @@ public class TableController extends BaseController {
         ownerColumn.setCellValueFactory(new PropertyValueFactory<>("owner"));
 
         // Load data into the table
-        ObservableList<SpaceMarine> data = getData();
-        tableView.setItems(data);
+        getData();
 
         // Set localized text
 
@@ -117,23 +120,34 @@ public class TableController extends BaseController {
         ownerColumn.setText(bundle.getString("ownerColumn"));
     }
 
-    private ObservableList<SpaceMarine> getData() {
-        ObservableList<SpaceMarine> data = FXCollections.observableArrayList();
-        try {
-            udpGui.createSocket();
-            Request request = new Request();
-            request.setCommand("show");
-            request.setLogin(this.getLogin());
-            request.setPassword(this.getPassword());
+    private void getData() {
+        CompletableFuture.supplyAsync(() -> {
+            ObservableList<SpaceMarine> data = FXCollections.observableArrayList();
+            try {
+                udpGui.createSocket();
+                Request request = new Request();
+                request.setCommand("show");
+                request.setLogin(this.getLogin());
+                request.setPassword(this.getPassword());
 
-            Response response = udpGui.sendRequest(request);
-            data.addAll(response.getOutputElement());
-
-        } catch (SocketException | UnknownHostException e) {
-            throw new RuntimeException(e);
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        return data;
+                Response response = udpGui.sendRequest(request);
+                data.addAll(response.getOutputElement());
+                return data;
+            } catch (SocketException | UnknownHostException e) {
+                throw new RuntimeException("Socket error", e);
+            } catch (IOException | ClassNotFoundException e) {
+                throw new RuntimeException("I/O error", e);
+            }
+        }, ExecutorResource.getExecutor()).thenAcceptAsync(data -> {
+            Platform.runLater(() -> {
+                tableView.setItems(data);
+                tableView.refresh();
+            });
+        }, Platform::runLater).exceptionally(e -> {
+            Platform.runLater(() -> {
+                NotificationManager.getInstance().showNotification("Ошибка загрузки данных: " + e.getMessage(), "error");
+            });
+            return null;
+        });
     }
 }

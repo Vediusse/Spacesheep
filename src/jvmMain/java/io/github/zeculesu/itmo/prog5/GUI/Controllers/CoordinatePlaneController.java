@@ -60,7 +60,6 @@ public class CoordinatePlaneController extends BaseController {
         this.bundle = ResourceManager.getInstance().getResourceBundle();
         updateTexts();
         ResourceManager.getInstance().registerController(this);
-        // Asynchronous request to get coordinates
         Request request = new Request();
         request.setCommand("getlogincoords");
         request.setLogin(this.getLogin());
@@ -74,7 +73,7 @@ public class CoordinatePlaneController extends BaseController {
         }).exceptionally(e -> {
             Platform.runLater(() -> {
                 this.loginCoord = new HashMap<>();
-                redrawCoordinatePlane(); // Перерисовываем координатную плоскость и точки при инициализации
+                redrawCoordinatePlane();
             });
             e.printStackTrace();
             return null;

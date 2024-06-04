@@ -1,5 +1,6 @@
 package io.github.zeculesu.itmo.prog5.GUI.Controllers;
 
+import io.github.zeculesu.itmo.prog5.GUI.ElementFormConsole;
 import io.github.zeculesu.itmo.prog5.GUI.NotificationManager;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Cruds;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Table;
@@ -102,23 +103,23 @@ public class AddController extends BaseController {
     @FXML
     public void handleSubmit() {
         try {
-            String name = nameField.getText();
-            Long x = Long.parseLong(coordinatesXField.getText());
-            float y = Float.parseFloat(coordinatesYField.getText());
-            int health = Integer.parseInt(healthField.getText());
+            String name = ElementFormConsole.checkName(nameField.getText());
+            Coordinates cords = new Coordinates(0L, 0f);
+            Coordinates Cordsx = ElementFormConsole.checkCoordinatesX(coordinatesXField.getText(), cords);
+            Coordinates CordsXy = ElementFormConsole.checkCoordinatesY(coordinatesYField.getText(), Cordsx);
+            int health = ElementFormConsole.checkHealth(healthField.getText());
             AstartesCategory category = AstartesCategory.valueOf(categoryField.getValue().toUpperCase());
             Weapon weaponType = Weapon.valueOf(weaponTypeField.getValue().toUpperCase());
             MeleeWeapon meleeWeapon = MeleeWeapon.valueOf(meleeWeaponField.getValue().toUpperCase());
-            String chapterName = chapterField.getText();
+            String chapterName = ElementFormConsole.checkName(chapterField.getText());
 
             if (name.isEmpty() || chapterName.isEmpty()) {
                 showError("Поля имени и главы не должны быть пустыми.");
                 return;
             }
 
-            Coordinates coordinates = new Coordinates(x, y);
             Chapter chapter = new Chapter(chapterName, chapterLField.getText());
-            SpaceMarine spaceMarine = new SpaceMarine(0, name, coordinates, health, category, weaponType, meleeWeapon, chapter);
+            SpaceMarine spaceMarine = new SpaceMarine(0, name, CordsXy, health, category, weaponType, meleeWeapon, chapter);
 
             Request request = new Request();
             request.setCommand("add");
