@@ -166,9 +166,6 @@ public class CoordinatePlaneController extends BaseController {
                 double scaledY = coordinatePlane.getHeight() / 2 - point.getY() * SCALE + dragOffsetY;
                 if (Math.pow(mouseX - scaledX, 2) + Math.pow(mouseY - scaledY, 2) <= Math.pow(clickRadius, 2)) {
                     // Если попали в точку, выводим информацию о ней
-//                    pointInfoLabelX.setText(pointInfoLabelX.getText() + point.getX());
-//                    pointInfoLabelY.setText(pointInfoLabelY.getText() + point.getY());
-//                    pointInfoLabelLogin.setText(pointInfoLabelLogin.getText() + login);
                     pointInfoLabelX.setText(bundle.getString("coordinatesXPrompt") + " = " + point.getX());
                     pointInfoLabelY.setText(bundle.getString("coordinatesYPrompt") + " = " + point.getY());
                     pointInfoLabelLogin.setText(bundle.getString("ownerColumn") + ": " + login);

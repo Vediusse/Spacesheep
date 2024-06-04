@@ -139,7 +139,7 @@ public class EditController extends BaseController {
         Object oldValue = event.getOldValue();
 
         if (!isOwner(marine.getOwner())) {
-            NotificationManager.getInstance().showNotification("Вы не являетесь владельцем этого элемента.", "error");
+            NotificationManager.getInstance().showNotification(bundle.getString("notOwnerMessage"), "error");
             tableView.refresh();
             return;
         }
@@ -156,12 +156,12 @@ public class EditController extends BaseController {
             int status = sendUpdate(marine);
             if (status != 200) {
                 Platform.runLater(() -> {
-                    NotificationManager.getInstance().showNotification("Изменение выполнено", "success");
+                    NotificationManager.getInstance().showNotification(bundle.getString("changeDone"), "success");
                     getData();
                 });
 
             }else {
-                NotificationManager.getInstance().showNotification("Что-то непроизошло", "error");
+                NotificationManager.getInstance().showNotification(bundle.getString("errorLabel"), "error");
                 tableView.refresh();
             }
         });
@@ -289,7 +289,7 @@ public class EditController extends BaseController {
         String oldValue = event.getOldValue();
 
         if (!isOwner(marine.getOwner())) {
-            NotificationManager.getInstance().showNotification("Вы не являетесь владельцем этого элемента.", "error");
+            NotificationManager.getInstance().showNotification(bundle.getString("notOwnerMessage"), "error");
             tableView.refresh();
             return;
         }
@@ -315,6 +315,19 @@ public class EditController extends BaseController {
     private boolean isOwner(String owner) {
         return owner.equals(this.getLogin());
     }
-
+    public void updateTexts(){
+        this.bundle = ResourceManager.getInstance().getResourceBundle();
+        nameColumn.setText(bundle.getString("nameColumn"));
+        xCoordinateColumn.setText(bundle.getString("coordinatesXPrompt"));
+        yCoordinateColumn.setText(bundle.getString("coordinatesYPrompt"));
+        creationDateColumn.setText(bundle.getString("creationDateColumn"));
+        healthColumn.setText(bundle.getString("healthColumn"));
+        categoryColumn.setText(bundle.getString("categoryColumn"));
+        weaponTypeColumn.setText(bundle.getString("weaponTypeColumn"));
+        meleeWeaponColumn.setText(bundle.getString("meleeWeaponColumn"));
+        chapterNameColumn.setText(bundle.getString("chapterNameColumn"));
+        chapterLegionColumn.setText(bundle.getString("chapterLegionColumn"));
+        ownerColumn.setText(bundle.getString("ownerColumn"));
+    }
 }
 

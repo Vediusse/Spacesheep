@@ -37,6 +37,11 @@ public class TableController extends BaseController {
 
     @FXML
     private TableView<SpaceMarine> tableView;
+    @FXML
+    private TableColumn<SpaceMarine, String> xCoordinateColumn;
+
+    @FXML
+    private TableColumn<SpaceMarine, String> yCoordinateColumn;
 
     @FXML
     private TableColumn<SpaceMarine, String> nameColumn;

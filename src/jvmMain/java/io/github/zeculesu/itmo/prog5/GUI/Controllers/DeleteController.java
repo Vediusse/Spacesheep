@@ -15,7 +15,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.VBox;
+import javafx.util.converter.DefaultStringConverter;
 
 import java.io.IOException;
 import java.net.SocketException;
@@ -28,6 +30,11 @@ public class DeleteController extends BaseController {
 
     @FXML
     private VBox content;
+    @FXML
+    private TableColumn<SpaceMarine, String> xCoordinateColumn;
+
+    @FXML
+    private TableColumn<SpaceMarine, String> yCoordinateColumn;
 
     @FXML
     private TableView<SpaceMarine> tableView;
@@ -133,6 +140,10 @@ public class DeleteController extends BaseController {
     public void deleteLast(ActionEvent actionEvent) {
         SpaceMarine selectedItem = tableView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
+            if (!selectedItem.getOwner().equals(this.getLogin())){
+                NotificationManager.getInstance().showNotification(bundle.getString("notOwnerMessage"), "error");
+                return;
+            }
             int id = selectedItem.getId();
             Request request = new Request();
             request.setCommand("remove_lower");
@@ -143,21 +154,25 @@ public class DeleteController extends BaseController {
             sendRequestAsync(request).thenAccept(response -> {
                 Platform.runLater(() -> {
                     tableView.setItems(getData());
-                    NotificationManager.getInstance().showNotification("Задача выполнена успешно.", "success");
+                    NotificationManager.getInstance().showNotification(bundle.getString("changeDone"), "success");
                 });
             }).exceptionally(e -> {
-                Platform.runLater(() -> NotificationManager.getInstance().showNotification("Ошибка выполнения задачи.", "error"));
+                Platform.runLater(() -> NotificationManager.getInstance().showNotification(bundle.getString("errorLabel"), "error"));
                 e.printStackTrace();
                 return null;
             });
         } else {
-            NotificationManager.getInstance().showNotification("Ничего не выбрано.", "error");
+            NotificationManager.getInstance().showNotification(bundle.getString("nothingSelected"), "error");
         }
     }
 
     public void deleteFirst(ActionEvent actionEvent) {
         SpaceMarine selectedItem = tableView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
+            if (!selectedItem.getOwner().equals(this.getLogin())){
+                NotificationManager.getInstance().showNotification(bundle.getString("notOwnerMessage"), "error");
+                return;
+            }
             MeleeWeapon meleeWeapon = selectedItem.getMeleeWeapon();
             Request request = new Request();
             request.setCommand("remove_all_by_melee_weapon");
@@ -168,21 +183,25 @@ public class DeleteController extends BaseController {
             sendRequestAsync(request).thenAccept(response -> {
                 Platform.runLater(() -> {
                     tableView.setItems(getData());
-                    NotificationManager.getInstance().showNotification("Задача выполнена успешно.", "success");
+                    NotificationManager.getInstance().showNotification(bundle.getString("changeDone"), "success");
                 });
             }).exceptionally(e -> {
-                Platform.runLater(() -> NotificationManager.getInstance().showNotification("Ошибка выполнения задачи.", "error"));
+                Platform.runLater(() -> NotificationManager.getInstance().showNotification(bundle.getString("errorLabel"), "error"));
                 e.printStackTrace();
                 return null;
             });
         } else {
-            NotificationManager.getInstance().showNotification("Ничего не выбрано.", "error");
+            NotificationManager.getInstance().showNotification(bundle.getString("nothingSelected"), "error");
         }
     }
 
     public void deleteId(ActionEvent actionEvent) {
         SpaceMarine selectedItem = tableView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
+            if (!selectedItem.getOwner().equals(this.getLogin())){
+                NotificationManager.getInstance().showNotification(bundle.getString("notOwnerMessage"), "error");
+                return;
+            }
             int id = selectedItem.getId();
             Request request = new Request();
             request.setCommand("remove_by_id");
@@ -193,15 +212,15 @@ public class DeleteController extends BaseController {
             sendRequestAsync(request).thenAccept(response -> {
                 Platform.runLater(() -> {
                     tableView.setItems(getData());
-                    NotificationManager.getInstance().showNotification("Задача выполнена успешно.", "success");
+                    NotificationManager.getInstance().showNotification(bundle.getString("changeDone"), "success");
                 });
             }).exceptionally(e -> {
-                Platform.runLater(() -> NotificationManager.getInstance().showNotification("Ошибка выполнения задачи.", "error"));
+                Platform.runLater(() -> NotificationManager.getInstance().showNotification(bundle.getString("errorLabel"), "error"));
                 e.printStackTrace();
                 return null;
             });
         } else {
-            NotificationManager.getInstance().showNotification("Ничего не выбрано.", "error");
+            NotificationManager.getInstance().showNotification(bundle.getString("nothingSelected"), "error");
         }
     }
 
@@ -211,5 +230,15 @@ public class DeleteController extends BaseController {
         deleteSelectedButton.setText(bundle.getString("deleteSelectedButton"));
         deleteFirstButton.setText(bundle.getString("deleteFirstButton"));
         deleteByWeaponButton.setText(bundle.getString("deleteByWeaponButton"));
+        nameColumn.setText(bundle.getString("nameColumn"));
+        coordinatesColumn.setText(bundle.getString("coordinatesColumn"));
+        creationDateColumn.setText(bundle.getString("creationDateColumn"));
+        healthColumn.setText(bundle.getString("healthColumn"));
+        categoryColumn.setText(bundle.getString("categoryColumn"));
+        weaponTypeColumn.setText(bundle.getString("weaponTypeColumn"));
+        meleeWeaponColumn.setText(bundle.getString("meleeWeaponColumn"));
+        chapterNameColumn.setText(bundle.getString("chapterNameColumn"));
+        chapterLegionColumn.setText(bundle.getString("chapterLegionColumn"));
+        ownerColumn.setText(bundle.getString("ownerColumn"));
     }
 }

@@ -7,7 +7,7 @@ public class MainClient {
     public static void main(String[] args) {
         System.out.print("Введите хост (для локального localhost): ");
         String host = readlnOrNull();
-        CLientConsole console = new CLientConsole(host, 45000);
+        CLientConsole console = new CLientConsole(host, 45004);
         console.start();
     }
 }

@@ -70,7 +70,6 @@ public class SignUpController extends BaseController {
                 }
             }, ExecutorResource.getExecutor()).thenAcceptAsync(response -> {
                 Platform.runLater(() -> {
-                    System.out.println(response.getStatus());
                     if (response.getStatus() == 0) {
                         errorLabel.setVisible(true);
                     } else {
