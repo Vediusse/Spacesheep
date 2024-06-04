@@ -47,8 +47,9 @@ public class CoordinatePlaneController extends BaseController {
     private final Color AXIS_COLOR = Color.FLORALWHITE; // Цвет осей координат
 
     private final double POINT_RADIUS = 3.0; // Радиус точек
+    private final double BACKGROUND_DOT_RADIUS = 1.0; // Радиус фоновых точек
 
-    private final double SCALE = 10.0; // Масштаб
+    private final double SCALE = 20; // Масштаб
 
     private double lastX, lastY; // Переменные для хранения предыдущих координат мыши
     private double dragStartX, dragStartY; // Начальные координаты мыши при начале перетаскивания
@@ -122,11 +123,37 @@ public class CoordinatePlaneController extends BaseController {
         // Очищаем холст перед перерисовкой
         gc.clearRect(0, 0, width, height);
 
+        // Рисуем фоновые точки
+        drawBackgroundDots(gc, width, height);
+
         // Перерисовываем координатную плоскость с учетом смещения
         drawCoordinatePlane(gc, width, height);
 
         // Перерисовываем точки с учетом смещения
         drawPoints(gc, width, height);
+    }
+
+    private void drawBackgroundDots(GraphicsContext gc, double width, double height) {
+        gc.setFill(Color.GRAY);
+
+        // Найти центральные координаты
+        double centerX = width / 2 + dragOffsetX;
+        double centerY = height / 2 + dragOffsetY;
+
+        // Определить границы для рисования точек
+        int minX = (int) Math.floor(-centerX / SCALE);
+        int maxX = (int) Math.ceil((width - centerX) / SCALE);
+        int minY = (int) Math.floor(-centerY / SCALE);
+        int maxY = (int) Math.ceil((height - centerY) / SCALE);
+
+        // Рисуем точки на целых координатах
+        for (int x = minX; x <= maxX; x++) {
+            for (int y = minY; y <= maxY; y++) {
+                double dotX = centerX + x * SCALE;
+                double dotY = centerY + y * SCALE;
+                gc.fillOval(dotX - BACKGROUND_DOT_RADIUS, dotY - BACKGROUND_DOT_RADIUS, BACKGROUND_DOT_RADIUS * 2, BACKGROUND_DOT_RADIUS * 2);
+            }
+        }
     }
 
     private void drawCoordinatePlane(GraphicsContext gc, double width, double height) {
@@ -138,7 +165,7 @@ public class CoordinatePlaneController extends BaseController {
     }
 
     private void drawPoints(GraphicsContext gc, double width, double height) {
-        if (loginCoord != null) { // Add null check here
+        if (loginCoord != null) {
             // Proceed with drawing points
             for (String login : loginCoord.keySet()) {
                 Color color = Color.color(Math.random(), Math.random(), Math.random());
