@@ -96,6 +96,9 @@ public class ElementFormConsole {
     public static int checkHealth(String input) throws InputFormException {
         if (input == null || input.isBlank() || input.isEmpty()) throw new InputFormException("Неправильный ввод количества здоровья");
         try {
+            if(Integer.parseInt(input) < 0){
+                throw new InputFormException("Количество здоровья не может быть отрицательным");
+            }
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
             throw new InputFormException("количество здоровья должно быть числом");

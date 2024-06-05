@@ -4,6 +4,7 @@ import io.github.zeculesu.itmo.prog5.GUI.ElementFormConsole;
 import io.github.zeculesu.itmo.prog5.GUI.NotificationManager;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Cruds;
 import io.github.zeculesu.itmo.prog5.GUI.Windows.Table;
+import io.github.zeculesu.itmo.prog5.error.InputFormException;
 import io.github.zeculesu.itmo.prog5.models.*;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -147,6 +148,8 @@ public class AddController extends BaseController {
 
         } catch (IllegalArgumentException e) {
             showError("Неправильный формат данных.");
+        } catch (InputFormException e){
+            showError(e.getMessage());
         }
     }
 
